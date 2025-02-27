@@ -202,7 +202,7 @@ Develop an algorithm with complexity \(\textit{O}(n)\) to compute the LU decompo
 \subsection*{ }
 
 \begin{algorithm}
-    \caption{Update Matrix Elements}
+    \caption{LU Decomposition}
     \begin{algorithmic}[1]
         \For{k = 1 \text{ to } n}
             \State $a_{k,k+1} \gets \frac{a_{k,k+1}}{a_{k,k}}$
@@ -210,7 +210,6 @@ Develop an algorithm with complexity \(\textit{O}(n)\) to compute the LU decompo
         \EndFor
     \end{algorithmic}
 \end{algorithm}
-
 
 \section*{Question4}
 To accelerate matrix multiplications, the \textit{Coppersmith Winograd} algorithm reduces the number of scalar multiplications by cleverly reformulating
@@ -227,7 +226,7 @@ the inner product. Assume that \textit{n} is even and define, for any vector \(x
 \end{align*}
 
 \noindent 
-(b) Now consider the matrix product \(\bm{C} = \bm{A}\bm{B}\), where \(\bm{A}, \bm{B} in \R^{n \times n}\). Devise an algorithm to compute \(\bm{C}\) using
+(b) Now consider the matrix product \(\bm{C} = \bm{A}\bm{B}\), where \(\bm{A}, \bm{B} \in \R^{n \times n}\). Devise an algorithm to compute \(\bm{C}\) using
 \(\frac{n^3}{2} + \textit{O}(n^2)\) scalar multiplications.
 
 \noindent
@@ -247,6 +246,33 @@ So we can conclude that:
 \end{align*}
 
 \subsection*{(b)}
+\noindent
+For each row \(\bm{a}_i \in \bm{A}\), calculating \(f(\bm{a}_i)\) costs \(\frac{n}{2}\) scalar multiplications. Therefore, the total cost of calculating \(f(\bm{a}_i), \forall \bm{a}_i \in \bm{A}\) is \(n \times \frac{n}{2} = \frac{n^2}{2}\) scalar multiplications. Similarly, the total cost of calculating \(f(\bm{b}_i),  \forall \bm{b}_i \in \bm{B}\) is \(\frac{n^2}{2}\) scalar multiplications, too.
+
+\noindent
+For each multiplication between row in \(\bm{A}\) and column in \(\bm{B}\), we need to calculate \(\frac{n}{2}\) times multiplication, if the \(f(\bm{a}_i)\) and \( f(\bm{b}_i)\) is given. Therefore, the total cost of calculating \(\bm{A} \times \bm{B}\) is \(n \times n \times \frac{n}{2} + O(n^2) = \frac{n^3}{2} + O(n^2)\) scalar multiplications.
+
+\noindent
+Therefore, the algorithm to compute \(\bm{C} = \bm{A}\bm{B}\) is as follows:
+
+\noindent
+\begin{algorithm}
+    \caption{Matrix Multiplication}
+    \begin{algorithmic}[1]
+        \State \textbf{Input:} Matrices \(\bm{A}, \bm{B} \in \R^{n \times n}\)
+        \State \textbf{Output:} Matrix \(\bm{C} = \bm{A} \bm{B}\)
+        \State Compute \(f(\bm{a}_i)\) for each row \(\bm{a}_i\) in \(\bm{A}\)
+        \State Compute \(f(\bm{b}_i)\) for each row \(\bm{b}_i\) in \(\bm{B}\)
+        \For{each row \(\bm{a}_i\) in \(\bm{A}\)}
+            \For{each column \(\bm{b}_j\) in \(\bm{B}\)}
+                \State Compute \(\sum_{k = 1}^{n / 2}((a_{i, 2k - 1} + b_{2k, j})(a_{i, 2k} + b_{2k - 1, j}))\)
+                \State Compute \(c_{i, j} = \sum_{k = 1}^{n / 2}((a_{i, 2k - 1} + b_{2k, j})(a_{i, 2k} + b_{2k - 1, j})) - f(\bm{a}_i) - f(\bm{b}_j)\)
+            \EndFor
+        \EndFor
+        \State \textbf{return} \(\bm{C}\)
+    \end{algorithmic}
+\end{algorithm}
+
 
 
 
