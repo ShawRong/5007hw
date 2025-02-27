@@ -211,6 +211,13 @@ Develop an algorithm with complexity \(\textit{O}(n)\) to compute the LU decompo
     \end{algorithmic}
 \end{algorithm}
 
+According to the LU decomposition algorithm, we can get the updated matrix \(\bm{A^*}\), and we can get the matrix \(\bm{L}\) and \(\bm{U}\) as follows:
+\(\bm{L} = \begin{bmatrix}
+    a_{i, j}^*
+\end{bmatrix}_{i > j}\) and \(\bm{U} = \begin{bmatrix}
+    a_{i, j}^*
+\end{bmatrix}_{i \leq j}\). Therefore, the algorithm has a complexity of \(O(n)\).
+
 \section*{Question4}
 To accelerate matrix multiplications, the \textit{Coppersmith Winograd} algorithm reduces the number of scalar multiplications by cleverly reformulating
 the inner product. Assume that \textit{n} is even and define, for any vector \(x \in \R^n\),
