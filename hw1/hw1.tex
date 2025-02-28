@@ -290,7 +290,7 @@ Therefore, the algorithm to compute \(\bm{C} = \bm{A}\bm{B}\) is as follows:
         \State \textbf{Input:} Matrices \(\bm{A}, \bm{B} \in \R^{n \times n}\)
         \State \textbf{Output:} Matrix \(\bm{C} = \bm{A} \bm{B}\)
         \State Compute \(f(\bm{a}_i)\) for each row \(\bm{a}_i\) in \(\bm{A}\)
-        \State Compute \(f(\bm{b}_i)\) for each row \(\bm{b}_i\) in \(\bm{B}\)
+        \State Compute \(f(\bm{b}_i)\) for each column \(\bm{b}_i\) in \(\bm{B}\)
         \For{each row \(\bm{a}_i\) in \(\bm{A}\)}
             \For{each column \(\bm{b}_j\) in \(\bm{B}\)}
                 \State Compute \(\sum_{k = 1}^{n / 2}((a_{i, 2k - 1} + b_{2k, j})(a_{i, 2k} + b_{2k - 1, j}))\)
