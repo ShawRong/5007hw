@@ -66,7 +66,7 @@ Let \(\bm{A} = \begin{bmatrix}
 \begin{align*}
     \bm{A} = \begin{bmatrix}
         1 & 0 & 0 \\
-        l_{21} & 0 & 0 \\
+        l_{21} & 1 & 0 \\
         l_{31} & l_{32} & 1 
     \end{bmatrix} \begin{bmatrix}
         u_{11} &u_{12} &u_{13}   \\
@@ -185,7 +185,7 @@ From these, we can solve:
 \end{align*}
 
 \section*{Question3}
-Let \(\bm{A} \in \R^{n \times n}\) be a tri-diagonal matrix(i.e. \(a_{ij} = 0 if |i - j| > 1\)). The pattern of nonzero entries is illustrated below:
+Let \(\bm{A} \in \R^{n \times n}\) be a tri-diagonal matrix(i.e. \(a_{ij} = 0 \) if \( |i - j| > 1\)). The pattern of nonzero entries is illustrated below:
 \begin{align*}
     \begin{bmatrix}
         \times & \times & & & \\
@@ -212,11 +212,32 @@ Develop an algorithm with complexity \(\textit{O}(n)\) to compute the LU decompo
 \end{algorithm}
 
 According to the LU decomposition algorithm, we can get the updated matrix \(\bm{A^*}\), and we can get the matrix \(\bm{L}\) and \(\bm{U}\) as follows:
-\(\bm{L} = \begin{bmatrix}
-    a_{i, j}^*
-\end{bmatrix}_{i > j}\) and \(\bm{U} = \begin{bmatrix}
-    a_{i, j}^*
-\end{bmatrix}_{i \leq j}\). Therefore, the algorithm has a complexity of \(O(n)\).
+\begin{align*}
+    \bm{L} = \begin{bmatrix}
+        1 & 0 & 0 & 0 & 0 & \cdots & 0 \\
+        a_{21}^* & 1 & 0 & 0 & 0 & \cdots & 0 \\
+        a_{31}^* & a_{32}^* & 1 & 0 & 0 & \cdots & 0 \\
+        a_{41}^* & a_{42}^* & a_{43}^* & 1 & 0 & \cdots & 0 \\
+        a_{51}^* & a_{52}^* & a_{53}^* & a_{54}^* & 1 & \cdots & 0 \\
+        \vdots & \vdots & \vdots & \vdots & \vdots & \ddots & \vdots \\
+        a_{n1}^* & a_{n2}^* & a_{n3}^* & a_{n4}^* & a_{n5}^* & \cdots & 1
+    \end{bmatrix}
+\end{align*}
+and 
+\begin{align*}
+    \bm{U} = 
+    \begin{bmatrix}
+        a_{11}^* & a_{12}^* & a_{13}^* & a_{14}^* & a_{15}^* & \cdots & a_{1n}^* \\
+        0 & a_{22}^* & a_{23}^* & a_{24}^* & a_{25}^* & \cdots & a_{2n}^* \\
+        0 & 0 & a_{33}^* & a_{34}^* & a_{35}^* & \cdots & a_{3n}^* \\
+        0 & 0 & 0 & a_{44}^* & a_{45}^* & \cdots & a_{4n}^* \\
+        0 & 0 & 0 & 0 & a_{55}^* & \cdots & a_{5n}^* \\
+        \vdots & \vdots & \vdots & \vdots & \vdots & \ddots & \vdots \\
+        0 & 0 & 0 & 0 & 0 & \cdots & a_{nn}^* 
+    \end{bmatrix}
+\end{align*}
+
+Therefore, the algorithm has a complexity of \(O(n)\).
 
 \section*{Question4}
 To accelerate matrix multiplications, the \textit{Coppersmith Winograd} algorithm reduces the number of scalar multiplications by cleverly reformulating
