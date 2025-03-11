@@ -2,6 +2,8 @@
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{geometry}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
 \usepackage{bm} 
 \newcommand{\R}{\mathbb{R}}
 \geometry{a4paper, margin=1in}
@@ -19,8 +21,10 @@ Given two vectors \(\bm{a} = [a_0, a_1, \cdots, a_{N - 1}]\) and \(\bm{b} = [b_0
 \[(\bm{a} \circledast\bm{b})_k = \sum_{j = 0}^{N - 1} a_j b_{k - j}, k = 0, 1, \cdots, N - 1,\]
 where \(\bm{b}\) is extended periodically, i.e., \(b_{k - j} = b_{(k - j) + N}\) if \(-N \leq k-j \leq -1\). Let \(\bm{f}, \bm{g}, \) and \(\bm{h}\) be vectors in \(\R^N\). Prove that the circular convolution satisfies:
 
+\noindent 
 (a) \(\bm{f}\circledast  \bm{g} = \bm{g} \circledast \bm{f}\). 
 
+\noindent 
 (b) \(\bm{f}\circledast (\bm{g} \circledast \bm{h}) = (\bm{f} \circledast \bm{g}) \circledast \bm{h}\). 
 \subsection*{(a)}
 \begin{align*}
@@ -49,5 +53,234 @@ Therefore, we can conclude that: \(\bm{f}\circledast  \bm{g} = \bm{g} \circledas
     &= ((\bm{f} \circledast \bm{g}) \circledast \bm{h})_k
 \end{align*}
 Therefore, we can conclude that: \(\bm{f}\circledast (\bm{g} \circledast \bm{h}) = (\bm{f} \circledast \bm{g}) \circledast \bm{h}\). 
+
+\section*{Question2}
+Let \(\bm{A} = \begin{bmatrix}
+   2 &-1 &3 \\
+   1 & 2& 1 \\
+   -3 &-1 &2 
+\end{bmatrix}\) be a \(3 \times 3\) matrix.
+
+\noindent 
+(a) Find the LU decomposition of the matrix \(\bm{A}\). The final result will look like this:
+\begin{align*}
+    \bm{A} = \begin{bmatrix}
+        1 & 0 & 0 \\
+        l_{21} & 0 & 0 \\
+        l_{31} & l_{32} & 1 
+    \end{bmatrix} \begin{bmatrix}
+        u_{11} &u_{12} &u_{13}   \\
+        0 &u_{22} &u_{23}   \\
+        0 &0 &u_{33}   \\
+    \end{bmatrix}
+\end{align*}
+
+\noindent 
+(b) Use the result in (a) to solve the system:
+\begin{align*}
+    2x_1 - x_2 + 3x_3 = 3 \\
+    x_1 + 2x_2 + x_3 = 4 \\
+    -3x_1 - x_2 + 2x_3 = 5
+\end{align*}
+
+\subsection*{(a)}
+\begin{align*}
+    \begin{bmatrix}
+        2 &-1 &3 \\
+        1/2 & 5/2& -1/2 \\
+        -3/2 &-5/2 &13/2 
+    \end{bmatrix}_{k=1}   \\
+    \begin{bmatrix}
+        2 &-1 &3 \\
+        1/2 & 5/2& -1/2 \\
+        -3/2 &-1 &6 
+    \end{bmatrix}_{k=2}  \\
+\end{align*}
+From this, we can get:
+\begin{align*}
+    A =  
+    \begin{bmatrix}
+        1 & 0  &0 \\
+        1/2 & 1& 0 \\
+        -3/2 &-1 &1 
+    \end{bmatrix} 
+    \begin{bmatrix}
+        2 &-1 &3 \\
+        0 & 5/2& -1/2 \\
+        0 & 0 &6 
+    \end{bmatrix} 
+\end{align*}
+\subsection*{(b)}
+From (a), we know:
+\begin{align*}
+    \begin{bmatrix}
+        1 & 0  &0 \\
+        1/2 & 1& 0 \\
+        -3/2 &-1 &1 
+    \end{bmatrix} 
+    \begin{bmatrix}
+        2 &-1 &3 \\
+        0 & 5/2& -1/2 \\
+        0 & 0 &6 
+    \end{bmatrix}
+    \begin{bmatrix}
+        x_1\\
+        x_2\\
+        x_3
+    \end{bmatrix} = 
+    \begin{bmatrix}
+        3 \\
+        4 \\
+        5 
+    \end{bmatrix}
+\end{align*}
+Assume \(\bm{L}\bm{U}\bm{x} = \bm{b}\) as \(\bm{L}\bm{y} = \bm{b}\), s.t.:
+From (a), we know:
+\begin{align*}
+    \begin{bmatrix}
+        1 & 0  &0 \\
+        1/2 & 1& 0 \\
+        -3/2 &-1 &1 
+    \end{bmatrix} 
+    \begin{bmatrix}
+        y_1\\
+        y_2\\
+        y_3
+    \end{bmatrix} = 
+    \begin{bmatrix}
+        3 \\
+        4 \\
+        5 
+    \end{bmatrix}
+\end{align*}
+From these, we can solve:
+\begin{align*}
+    y_1 = 3 \\
+    y_2 = 5/2 \\
+    y_3 = 12 
+\end{align*}
+s.t.
+\begin{align*}
+    \begin{bmatrix}
+        2 &-1 &3 \\
+        0 & 5/2& -1/2 \\
+        0 & 0 &6 
+    \end{bmatrix}
+    \begin{bmatrix}
+        x_1\\
+        x_2\\
+        x_3
+    \end{bmatrix} = 
+    \begin{bmatrix}
+    3 \\
+    5/2 \\
+    12 
+    \end{bmatrix}
+\end{align*}
+From these, we can solve:
+\begin{align*}
+    x_1 = -4/5\\
+    x_2 = 7/5\\
+    x_3 = 2 \\
+\end{align*}
+
+\section*{Question3}
+Let \(\bm{A} \in \R^{n \times n}\) be a tri-diagonal matrix(i.e. \(a_{ij} = 0 if |i - j| > 1\)). The pattern of nonzero entries is illustrated below:
+\begin{align*}
+    \begin{bmatrix}
+        \times & \times & & & \\
+        \times & \times & \times & & \\
+        & \ddots & \ddots & \ddots & \\
+        & &  \times & \times &\times \\
+        & & & \times & \times \\
+    \end{bmatrix}
+\end{align*}
+
+\noindent 
+Develop an algorithm with complexity \(\textit{O}(n)\) to compute the LU decomposition of \(\bm{A}\), assuming all the pivots are non-zero.
+
+\subsection*{ }
+
+\begin{algorithm}
+    \caption{LU Decomposition}
+    \begin{algorithmic}[1]
+        \For{k = 1 \text{ to } n}
+            \State $a_{k,k+1} \gets \frac{a_{k,k+1}}{a_{k,k}}$
+            \State $a_{k+1,k+1} \gets a_{k+1,k+1} - a_{k,k+1} \cdot a_{k+1,k}$
+        \EndFor
+    \end{algorithmic}
+\end{algorithm}
+
+According to the LU decomposition algorithm, we can get the updated matrix \(\bm{A^*}\), and we can get the matrix \(\bm{L}\) and \(\bm{U}\) as follows:
+\(\bm{L} = \begin{bmatrix}
+    a_{i, j}^*
+\end{bmatrix}_{i > j}\) and \(\bm{U} = \begin{bmatrix}
+    a_{i, j}^*
+\end{bmatrix}_{i \leq j}\). Therefore, the algorithm has a complexity of \(O(n)\).
+
+\section*{Question4}
+To accelerate matrix multiplications, the \textit{Coppersmith Winograd} algorithm reduces the number of scalar multiplications by cleverly reformulating
+the inner product. Assume that \textit{n} is even and define, for any vector \(x \in \R^n\),
+\begin{align*}
+    f(\bm{x}) = \sum_{i = 1}^{n / 2} x_{2i - 1} x_{2i}
+\end{align*}.
+
+
+\noindent 
+(a) Prove that for all vectors \(\bm{x}, \bm{y} \in \R^n\), the inner product can be re-expressed as
+\begin{align*}
+    \bm{x}^T\bm{y} = \sum_{i = 1}^{n / 2}((x_{2i - 1} + y_{2i})(x_{2i} + y_{2i - 1})) - f(\bm{x}) - f(\bm{y}).
+\end{align*}
+
+\noindent 
+(b) Now consider the matrix product \(\bm{C} = \bm{A}\bm{B}\), where \(\bm{A}, \bm{B} \in \R^{n \times n}\). Devise an algorithm to compute \(\bm{C}\) using
+\(\frac{n^3}{2} + \textit{O}(n^2)\) scalar multiplications.
+
+\noindent
+\textit{Note:} A standard matrix multiplication requires \(n^3\) scalar multiplications. By combining this method with other techniques, one can obtain
+the Coppersmith Winograd algorithm, which has an asymptotic complexity of \(O(n^{2.375})\).
+
+\subsection*{(a)}
+\begin{align*}
+    &\sum_{i = 1}^{n / 2}((x_{2i - 1} + y_{2i})(x_{2i} + y_{2i - 1})) \\
+    &=\sum_{i = 1}^{n / 2}x_{2i - 1}x_{2i} + y_{2i}x_{2i} + x_{2i - 1}y_{2i - 1} +  y_{2i}y_{2i - 1} \\
+    &=\sum_{i = 1}^{n / 2}x_{2i - 1}x_{2i} + \sum_{i = 1}^{n / 2}y_{2i}x_{2i} + \sum_{i = 1}^{n / 2}x_{2i - 1}y_{2i - 1} +  \sum_{i = 1}^{n / 2}y_{2i}y_{2i - 1} \\
+    &= \bm{x}^T\bm{y} + f(\bm{x}) + f(\bm{y})
+\end{align*}
+So we can conclude that:
+\begin{align*}
+    \bm{x}^T\bm{y} = \sum_{i = 1}^{n / 2}((x_{2i - 1} + y_{2i})(x_{2i} + y_{2i - 1})) - f(\bm{x}) - f(\bm{y}).
+\end{align*}
+
+\subsection*{(b)}
+\noindent
+For each row \(\bm{a}_i \in \bm{A}\), calculating \(f(\bm{a}_i)\) costs \(\frac{n}{2}\) scalar multiplications. Therefore, the total cost of calculating \(f(\bm{a}_i), \forall \bm{a}_i \in \bm{A}\) is \(n \times \frac{n}{2} = \frac{n^2}{2}\) scalar multiplications. Similarly, the total cost of calculating \(f(\bm{b}_i),  \forall \bm{b}_i \in \bm{B}\) is \(\frac{n^2}{2}\) scalar multiplications, too.
+
+\noindent
+For each multiplication between row in \(\bm{A}\) and column in \(\bm{B}\), we need to calculate \(\frac{n}{2}\) times multiplication, if the \(f(\bm{a}_i)\) and \( f(\bm{b}_i)\) is given. Therefore, the total cost of calculating \(\bm{A} \times \bm{B}\) is \(n \times n \times \frac{n}{2} + O(n^2) = \frac{n^3}{2} + O(n^2)\) scalar multiplications.
+
+\noindent
+Therefore, the algorithm to compute \(\bm{C} = \bm{A}\bm{B}\) is as follows:
+
+\noindent
+\begin{algorithm}
+    \caption{Matrix Multiplication}
+    \begin{algorithmic}[1]
+        \State \textbf{Input:} Matrices \(\bm{A}, \bm{B} \in \R^{n \times n}\)
+        \State \textbf{Output:} Matrix \(\bm{C} = \bm{A} \bm{B}\)
+        \State Compute \(f(\bm{a}_i)\) for each row \(\bm{a}_i\) in \(\bm{A}\)
+        \State Compute \(f(\bm{b}_i)\) for each row \(\bm{b}_i\) in \(\bm{B}\)
+        \For{each row \(\bm{a}_i\) in \(\bm{A}\)}
+            \For{each column \(\bm{b}_j\) in \(\bm{B}\)}
+                \State Compute \(\sum_{k = 1}^{n / 2}((a_{i, 2k - 1} + b_{2k, j})(a_{i, 2k} + b_{2k - 1, j}))\)
+                \State Compute \(c_{i, j} = \sum_{k = 1}^{n / 2}((a_{i, 2k - 1} + b_{2k, j})(a_{i, 2k} + b_{2k - 1, j})) - f(\bm{a}_i) - f(\bm{b}_j)\)
+            \EndFor
+        \EndFor
+        \State \textbf{return} \(\bm{C}\)
+    \end{algorithmic}
+\end{algorithm}
+
+
+
 
 \end{document}
