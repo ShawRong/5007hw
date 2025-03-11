@@ -1,0 +1,53 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{geometry}
+\usepackage{bm} 
+\newcommand{\R}{\mathbb{R}}
+\geometry{a4paper, margin=1in}
+
+\title{MSBD 5007 HW2}
+\author{RONG Shuo}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\section*{Question1}
+Given two vectors \(\bm{a} = [a_0, a_1, \cdots, a_{N - 1}]\) and \(\bm{b} = [b_0, b_1, \cdots, b_{N-1}]^T\), their \textit{circular convolution} is defined by
+\[(\bm{a} \circledast\bm{b})_k = \sum_{j = 0}^{N - 1} a_j b_{k - j}, k = 0, 1, \cdots, N - 1,\]
+where \(\bm{b}\) is extended periodically, i.e., \(b_{k - j} = b_{(k - j) + N}\) if \(-N \leq k-j \leq -1\). Let \(\bm{f}, \bm{g}, \) and \(\bm{h}\) be vectors in \(\R^N\). Prove that the circular convolution satisfies:
+
+(a) \(\bm{f}\circledast  \bm{g} = \bm{g} \circledast \bm{f}\). 
+
+(b) \(\bm{f}\circledast (\bm{g} \circledast \bm{h}) = (\bm{f} \circledast \bm{g}) \circledast \bm{h}\). 
+\subsection*{(a)}
+\begin{align*}
+    (\bm{f} \circledast\bm{g})_k & \\  
+    &= \sum_{j = 0}^{N - 1} f_j g_{k - j} \\
+    &= \sum_{j = k + 1}^{N - 1} f_j g_{k - j} + \sum_{j = 0}^{k} f_j g_{k - j}  \\
+    &= \sum_{j = k + 1}^{N - 1} f_j g_{N + k - j} + \sum_{j = 0}^{k} f_j g_{k - j}  \\
+    &= \sum_{i = k + 1}^{N - 1} f_{N + k - i} g_{i} + \sum_{j = 0}^{k} f_j g_{k - j}  \\
+    &= \sum_{i = k + 1}^{N - 1}  g_{i} f_{k - i} + \sum_{i = 0}^{k} f_{k - i} g_i  \\
+    &= \sum_{i = k + 1}^{N - 1}  g_{i} f_{k - i} + \sum_{i = 0}^{k} g_i f_{k - i}  \\
+    &= \sum_{i = 0}^{N - 1} g_{i} f_{k - i} \\
+    &= (\bm{g} \circledast \bm{f})_k
+\end{align*}
+Therefore, we can conclude that: \(\bm{f}\circledast  \bm{g} = \bm{g} \circledast \bm{f}\). 
+
+\subsection*{(b)}
+\begin{align*}
+    (\bm{f} \circledast (\bm{g} \circledast \bm{h}))_k &= (\bm{f} \circledast (\bm{h} \circledast \bm{g}))_k \\ 
+    &= \sum_{j = 0}^{N-1} f_j(\bm{h} \circledast \bm{g})_{k - j} \\
+    &= \sum_{j = 0}^{N-1} f_j \sum_{i = 0}^{N-1} h_i g_{k - j - i} \\
+    &= \sum_{j = 0}^{N-1}  \sum_{i = 0}^{N-1} f_j h_i g_{k - j - i} \\
+    &= \sum_{i = 0}^{N-1} \sum_{j = 0}^{N-1} f_j h_i g_{k - j - i} \\
+    &= \sum_{i = 0}^{N-1} h_i \sum_{j = 0}^{N-1} f_j  g_{k - j - i} \\
+    &= \sum_{i = 0}^{N-1} h_i(\bm{f} \circledast \bm{g})_{k - j} \\
+    &= (\bm{h} \circledast (\bm{f} \circledast \bm{g}))_k \\
+    &= ((\bm{f} \circledast \bm{g}) \circledast \bm{h})_k
+\end{align*}
+Therefore, we can conclude that: \(\bm{f}\circledast (\bm{g} \circledast \bm{h}) = (\bm{f} \circledast \bm{g}) \circledast \bm{h}\). 
+
+\end{document}
