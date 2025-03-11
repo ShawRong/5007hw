@@ -15,39 +15,49 @@
 \maketitle
 
 \section*{Question1}
-Given two vectors \(\bm{a} = [a_0, a_1, \cdots, a_{N - 1}]\) and \(\bm{b} = [b_0, b_1, \cdots, b_{N-1}]^T\), their \textit{circular convolution} is defined by
-\[(\bm{a} \circledast\bm{b})_k = \sum_{j = 0}^{N - 1} a_j b_{k - j}, k = 0, 1, \cdots, N - 1,\]
-where \(\bm{b}\) is extended periodically, i.e., \(b_{k - j} = b_{(k - j) + N}\) if \(-N \leq k-j \leq -1\). Let \(\bm{f}, \bm{g}, \) and \(\bm{h}\) be vectors in \(\R^N\). Prove that the circular convolution satisfies:
+Let \(\bm{A} = \begin{bmatrix}
+    1 & 2 & 1 & 0 \\ 
+    1 & 1 & 2 & 1 \\ 
+    1 & 0 & 1 & 2 \\ 
+    0 & 1 & 1 & 1  
+\end{bmatrix}\) and \(\bm{b} = \begin{bmatrix}
+    6 \\
+    5 \\
+    7 \\
+    4 
+\end{bmatrix}\). Use the QR factorization to solve the least square problem:
+\[
+    \min_{\bm{x} \in \R^4} \|\bm{Ax} - \bm{b}\|_2^2.
+\]
 
-(a) \(\bm{f}\circledast  \bm{g} = \bm{g} \circledast \bm{f}\). 
-
-(b) \(\bm{f}\circledast (\bm{g} \circledast \bm{h}) = (\bm{f} \circledast \bm{g}) \circledast \bm{h}\). 
 \subsection*{(a)}
-\begin{align*}
-    (\bm{f} \circledast\bm{g})_k & \\  
-    &= \sum_{j = 0}^{N - 1} f_j g_{k - j} \\
-    &= \sum_{j = k + 1}^{N - 1} f_j g_{k - j} + \sum_{j = 0}^{k} f_j g_{k - j}  \\
-    &= \sum_{j = k + 1}^{N - 1} f_j g_{N + k - j} + \sum_{j = 0}^{k} f_j g_{k - j}  \\
-    &= \sum_{i = k + 1}^{N - 1} f_{N + k - i} g_{i} + \sum_{j = 0}^{k} f_j g_{k - j}  \\
-    &= \sum_{i = k + 1}^{N - 1}  g_{i} f_{k - i} + \sum_{i = 0}^{k} f_{k - i} g_i  \\
-    &= \sum_{i = k + 1}^{N - 1}  g_{i} f_{k - i} + \sum_{i = 0}^{k} g_i f_{k - i}  \\
-    &= \sum_{i = 0}^{N - 1} g_{i} f_{k - i} \\
-    &= (\bm{g} \circledast \bm{f})_k
-\end{align*}
-Therefore, we can conclude that: \(\bm{f}\circledast  \bm{g} = \bm{g} \circledast \bm{f}\). 
 
 \subsection*{(b)}
-\begin{align*}
-    (\bm{f} \circledast (\bm{g} \circledast \bm{h}))_k &= (\bm{f} \circledast (\bm{h} \circledast \bm{g}))_k \\ 
-    &= \sum_{j = 0}^{N-1} f_j(\bm{h} \circledast \bm{g})_{k - j} \\
-    &= \sum_{j = 0}^{N-1} f_j \sum_{i = 0}^{N-1} h_i g_{k - j - i} \\
-    &= \sum_{j = 0}^{N-1}  \sum_{i = 0}^{N-1} f_j h_i g_{k - j - i} \\
-    &= \sum_{i = 0}^{N-1} \sum_{j = 0}^{N-1} f_j h_i g_{k - j - i} \\
-    &= \sum_{i = 0}^{N-1} h_i \sum_{j = 0}^{N-1} f_j  g_{k - j - i} \\
-    &= \sum_{i = 0}^{N-1} h_i(\bm{f} \circledast \bm{g})_{k - j} \\
-    &= (\bm{h} \circledast (\bm{f} \circledast \bm{g}))_k \\
-    &= ((\bm{f} \circledast \bm{g}) \circledast \bm{h})_k
-\end{align*}
-Therefore, we can conclude that: \(\bm{f}\circledast (\bm{g} \circledast \bm{h}) = (\bm{f} \circledast \bm{g}) \circledast \bm{h}\). 
+
+\section*{Question2}
+Find the best rank-1 approximation with respect to the Frobenius norm to the matrix.
+\[\bm{A} = \begin{bmatrix}
+   2 & 1 & 1 \\ 
+   1 & 2 & 1 \\ 
+   1 & 1 & 2 \\ 
+\end{bmatrix}\]
+\section*{Question3}
+Let \(\bm{X}\) and \(\bm{Y}\) be two matrices of dimensions \(m \times n\). Consider the optimization problem
+\[
+    \min_{Q\in\R^{m\times n}} \|\bm{X} - \bm{QY}\|_F \text{ subject to } \bm{Q}^T\bm{Q} = \bm{I}_m.
+\],
+where \(\|\dot\|_F\) denotes the Frobenius norm and \(I_m\). is the \(m \times n\) identity matrix. This problem aries when we want to align two datasets \(\bm{X} \text{ and }\bm{Y}\) up to an orthogonal linear transformation. Prove that the solution is given by \(\bm{Q} = \bm{U}\bm{V}^T\), where \(\bm{U}\bm{\Sigma}\bm{V}^T\) is the singular value decomposition of \(\bm{XY}^T\), i.e. \(\bm{X}\bm{Y}^T = \bm{U}\bm{\Sigma}\bm{V}^T\).
+
+\section*{Question4}
+Let \(\bm{A} \in \R^{m \times n}\) be a matrix with \(m \geq n\) and full column rank, i.e., \(\text{rank}(\bm{A}) = n\). A \textit{Given rotation} matrix \(\bm{G}_{i, j, \theta} \in \R^{n \times n}\) (for indices \(1 \leq i \leq j \leq n\)) is defined by
+\[
+    \bm{G}_{i, j, \theta} = \begin{bmatrix}
+        \bm{I}_{i-1} &  &  &  &  \\
+                     & \cos(\theta) &  & -\sin(\theta) & \\
+                     & & \bm{I}_{j - i - 1}& & \\
+         & \sin(\theta) && \cos(\theta) &\\
+         & &&& \bm{I}_{n-j}
+    \end{bmatrix}
+\]
 
 \end{document}
