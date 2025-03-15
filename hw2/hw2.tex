@@ -30,9 +30,76 @@ Let \(\bm{A} = \begin{bmatrix}
     \min_{\bm{x} \in \R^4} \|\bm{Ax} - \bm{b}\|_2^2.
 \]
 
-\subsection*{(a)}
+\subsection*{Answer}
+We can calculate the QR factorization of \(\bm{A}\) by Householder transformation. 
+\[
+    \bm{Q} = \frac{1}{\sqrt{3}}\begin{bmatrix}
+       1 & 1 & -1 & 0  \\
+       1 & 0 & 1 & -1  \\
+       1 & -1 & 0 & 1  \\
+       0 & 1 & 1 & 1  
+    \end{bmatrix}
+\]
+\[
+    \bm{R} = \begin{bmatrix}
+       \sqrt{3} & \sqrt{3} & \frac{4}{\sqrt{3}} & \sqrt{3}  \\
+       0 & \sqrt{3} & \frac{1}{\sqrt{3}} & -\frac{1}{\sqrt{3}}  \\
+       0 & 0 & \frac{2}{\sqrt{3}} & \frac{2}{\sqrt{3}}  \\
+       0 & 0 & 0 & \frac{2}{\sqrt{3}}  
+    \end{bmatrix}
+\]
+\[
+    \bm{Q}^T\bm{b}= \frac{1}{\sqrt{3}}\begin{bmatrix}
+        1 &1 &1 &0\\
+        1 &0 &-1 &1 \\
+        -1 &1 &0 &1 \\
+        0 &-1 &1 &1 \\
+    \end{bmatrix}\begin{bmatrix}
+        6 \\
+        5 \\
+        7 \\
+        4
+    \end{bmatrix} = \begin{bmatrix}
+        6\sqrt{3} \\
+        \sqrt{3} \\
+        \sqrt{3} \\
+        2\sqrt{3}
+    \end{bmatrix}
+\]
 
-\subsection*{(b)}
+
+We need to solve \(\bm{R}\bm{x} = \bm{Q}^T\bm{b}\).
+
+\[
+    \begin{bmatrix}
+       \sqrt{3} & \sqrt{3} & \frac{4}{\sqrt{3}} & \sqrt{3}  \\
+       0 & \sqrt{3} & \frac{1}{\sqrt{3}} & -\frac{1}{\sqrt{3}}  \\
+       0 & 0 & \frac{2}{\sqrt{3}} & \frac{2}{\sqrt{3}}  \\
+       0 & 0 & 0 & \frac{2}{\sqrt{3}}  
+    \end{bmatrix} \begin{bmatrix}
+        x_1 \\
+        x_2 \\
+        x_3 \\
+        x_4
+    \end{bmatrix} = \begin{bmatrix}
+        6\sqrt{3} \\
+        \sqrt{3} \\
+        \sqrt{3} \\
+        2\sqrt{3}
+    \end{bmatrix}
+\]
+The solution is :
+\[
+\begin{bmatrix}
+    \frac 5 2 \\
+    \frac 5 2 \\
+    -\frac 3 2 \\
+    3 \\
+\end{bmatrix}
+\]
+
+
+
 
 \section*{Question2}
 Find the best rank-1 approximation with respect to the Frobenius norm to the matrix.
@@ -41,12 +108,60 @@ Find the best rank-1 approximation with respect to the Frobenius norm to the mat
    1 & 2 & 1 \\ 
    1 & 1 & 2 \\ 
 \end{bmatrix}\]
+
+\section*{Answer}
+\[
+\bm{A}\bm{A}^T = \begin{bmatrix}
+    2 & 1 & 1 \\
+    1 & 2 & 1 \\
+    1 & 1 & 2 \\
+\end{bmatrix} \begin{bmatrix}
+    2 & 1 & 1 \\
+    1 & 2 & 1 \\
+    1 & 1 & 2 \\
+\end{bmatrix} = \begin{bmatrix}
+    6 & 5 & 5 \\
+    5 & 6 & 5 \\
+    5 & 5 & 6 \\
+\end{bmatrix}
+\]
+
+We need solve the equation, 
+\begin{align*}
+    -(\phi - 16)(\phi - 1)^2 = 0
+\end{align*}
+The roots are \(\phi = 16, 1, 1\). 
+We can calculate the normalized eigenvectors of \(\phi = 16\) is \(\frac{1}{\sqrt{3}}\begin{bmatrix}
+    1 \\
+    1 \\
+    1 \\
+\end{bmatrix}\),
+So the rank-1 approximation is
+\begin{align*}
+    4 * \frac{1}{\sqrt{3}} \begin{bmatrix}
+       1 \\ 
+       1 \\ 
+       1 \\ 
+    \end{bmatrix} \frac{1}{\sqrt{3}} \begin{bmatrix}
+        1 & 1 & 1
+    \end{bmatrix} = \frac{4}{3} \begin{bmatrix}
+        1 & 1 & 1 \\
+        1 & 1 & 1 \\
+        1 & 1 & 1 \\
+    \end{bmatrix}
+\end{align*}
+
+
+
+
 \section*{Question3}
 Let \(\bm{X}\) and \(\bm{Y}\) be two matrices of dimensions \(m \times n\). Consider the optimization problem
 \[
     \min_{\bm{Q}\in\R^{m\times n}} \|\bm{X} - \bm{QY}\|_F \text{ subject to } \bm{Q}^T\bm{Q} = \bm{I}_m.
 \],
 where \(\|\cdot\|_F\) denotes the Frobenius norm and \(I_m\). is the \(m \times n\) identity matrix. This problem aries when we want to align two datasets \(\bm{X} \text{ and }\bm{Y}\) up to an orthogonal linear transformation. Prove that the solution is given by \(\bm{Q} = \bm{U}\bm{V}^T\), where \(\bm{U}\bm{\Sigma}\bm{V}^T\) is the singular value decomposition of \(\bm{XY}^T\), i.e. \(\bm{X}\bm{Y}^T = \bm{U}\bm{\Sigma}\bm{V}^T\).
+
+\section*{Answer}
 
 \section*{Question4}
 Let \(\bm{A} \in \R^{m \times n}\) be a matrix with \(m \geq n\) and full column rank, i.e., \(\text{rank}(\bm{A}) = n\). A \textit{Given rotation} matrix \(\bm{G}_{i, j, \theta} \in \R^{n \times n}\) (for indices \(1 \leq i \leq j \leq n\)) is defined by
