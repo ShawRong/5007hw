@@ -44,9 +44,9 @@ Find the best rank-1 approximation with respect to the Frobenius norm to the mat
 \section*{Question3}
 Let \(\bm{X}\) and \(\bm{Y}\) be two matrices of dimensions \(m \times n\). Consider the optimization problem
 \[
-    \min_{Q\in\R^{m\times n}} \|\bm{X} - \bm{QY}\|_F \text{ subject to } \bm{Q}^T\bm{Q} = \bm{I}_m.
+    \min_{\bm{Q}\in\R^{m\times n}} \|\bm{X} - \bm{QY}\|_F \text{ subject to } \bm{Q}^T\bm{Q} = \bm{I}_m.
 \],
-where \(\|\dot\|_F\) denotes the Frobenius norm and \(I_m\). is the \(m \times n\) identity matrix. This problem aries when we want to align two datasets \(\bm{X} \text{ and }\bm{Y}\) up to an orthogonal linear transformation. Prove that the solution is given by \(\bm{Q} = \bm{U}\bm{V}^T\), where \(\bm{U}\bm{\Sigma}\bm{V}^T\) is the singular value decomposition of \(\bm{XY}^T\), i.e. \(\bm{X}\bm{Y}^T = \bm{U}\bm{\Sigma}\bm{V}^T\).
+where \(\|\cdot\|_F\) denotes the Frobenius norm and \(I_m\). is the \(m \times n\) identity matrix. This problem aries when we want to align two datasets \(\bm{X} \text{ and }\bm{Y}\) up to an orthogonal linear transformation. Prove that the solution is given by \(\bm{Q} = \bm{U}\bm{V}^T\), where \(\bm{U}\bm{\Sigma}\bm{V}^T\) is the singular value decomposition of \(\bm{XY}^T\), i.e. \(\bm{X}\bm{Y}^T = \bm{U}\bm{\Sigma}\bm{V}^T\).
 
 \section*{Question4}
 Let \(\bm{A} \in \R^{m \times n}\) be a matrix with \(m \geq n\) and full column rank, i.e., \(\text{rank}(\bm{A}) = n\). A \textit{Given rotation} matrix \(\bm{G}_{i, j, \theta} \in \R^{n \times n}\) (for indices \(1 \leq i \leq j \leq n\)) is defined by
@@ -62,7 +62,7 @@ Let \(\bm{A} \in \R^{m \times n}\) be a matrix with \(m \geq n\) and full column
 where \(\bm{I}_k\) denotes the \(k \times k\) identity matrix, and all unspecified entries are zero. 
 Equivalently, \(\bm{G}_{i, j, \theta}\) is identical to the identity matrix except for the four entries in its \textit{i}th and \textit{j}th rows and columns:
 \[
-    g_{ii} = cos\theta, g_{ij} = -sin\theta, g_{jj} = cos\theta.
+    g_{ii} = \text{cos}\theta, g_{ij} = -\text{sin}\theta, g_{ji} = \text{sin}\theta, g_{jj} = \text{cos}\theta.
 \] 
 Answer the following questions:
 
