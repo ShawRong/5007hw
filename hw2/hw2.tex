@@ -3,6 +3,9 @@
 \usepackage{amssymb}
 \usepackage{geometry}
 \usepackage{bm} 
+\usepackage{algorithm}
+\usepackage{algorithmicx}
+\usepackage{algpseudocode}
 \newcommand{\R}{\mathbb{R}}
 \geometry{a4paper, margin=1in}
 
@@ -322,7 +325,92 @@ This yields:
 \]
 
 \section*{(c)}
+We know that for a vector \(\bm{v}_k\), which satisfies \(v_{i} = 0, \text{ if } i > k\) like:
+\begin{align*}
+    \bm{v}_k = \begin{bmatrix}
+        v_0 \\
+        \vdots \\
+        v_{k - 1}\\
+        v_k \\
+        0 \\
+        \vdots \\
+        0 
+    \end{bmatrix}
+\end{align*}
+We can design a matrix \(\bm{G}_{k - 1, k, \theta}\),(where \(\theta\) is calculated by \(v_{k-1} \text{ and } v_k\)) s.t.
+\begin{align*}
+    \bm{G}_{k - 1, k, \theta} \bm{v}_k = \begin{bmatrix}
+        v_0 \\
+        \vdots \\
+        \sqrt{v_{k - 1}^2 + v_{k}^2}\\
+        0 \\
+        0 \\
+        \vdots \\
+        0 
+    \end{bmatrix} = \bm{v}_{k-1}' \\
+\end{align*}
+And \(\|\bm{v}_k\| = \|\bm{v}'_{k - 1}\|\)\\
+For vector(\(\bm{w}\)) that follow the pattern of \(\bm{v}_{k - 1}\), we know that:
+\begin{align*}
+    \bm{G}_{k - 1, k, \theta} \bm{w} = \bm{w}
+\end{align*}
+s.t.
+\begin{align*}
+    \bm{G}_{k - 1, k, \theta} \begin{bmatrix}
+        \bm{w}_0 & \cdots &\bm{w}_{n - 1} & \bm{v}_{k}
+    \end{bmatrix} = \begin{bmatrix}
+        \bm{w}_0 & \cdots &\bm{w}_{n - 1} & \bm{v}_{k - 1}'
+    \end{bmatrix} 
+\end{align*}
 
+
+We know \(\bm{G}_{i, j, \theta}\) is orthogonal.
+According to this, we can do the following steps to get the QR decomposition of an upper Hessenberg matrix \(\bm{A}\):
+\begin{align*}
+    \bm{G}_{1, 2, \theta_1} \bm{G}_{2, 3, \theta_2} \cdots \bm{G}_{n - 1, n, \theta_{n - 1}}\bm{A}  =  \bm{R} \\
+    \bm{A} = \bm{G}_{n - 1, n, \theta_{n - 1}}^T \cdots \bm{G}_{2, 3, \theta_2}^T \bm{G}_{1, 2, \theta_1}^T\bm{R} = \bm{Q}\bm{R}
+\end{align*}
+
+Also, it's easy to see:
+\begin{align*}
+    G_{k - 1, k, \theta}\bm{e}_{i} = \bm{e}_{i}, \forall i \neq k  \\
+\end{align*}
+And for the multiplication of 2 matrices \(\bm{G}_{k-1, k, \theta}\bm{G}_{k, k+1, \theta}\), we have:
+\begin{align*}
+    \bm{G}_{k-1, k, \theta}\bm{G}_{k, k+1, \theta} = \bm{G}_{k-1, k, \theta} \begin{bmatrix}
+        \bm{e}_0 & \cdots &\bm{e}_{k - 1} &\bm{v}_{k} &\bm{v}_{k+1} &\bm{e}_{k+2} &\cdots & \bm{e}_n \\
+    \end{bmatrix}\\
+    = \begin{bmatrix}
+        \bm{e}_0 & \cdots &\bm{e}_{k - 1} &\bm{v}_{k}'  & \bm{v}_{k+1}'&\bm{e}_{k+2} &\cdots & \bm{e}_n \\
+    \end{bmatrix}
+\end{align*}
+So we know, for any multiplication of any two rotation matrix, we cost \(O(n)\) time to calculate the product.
+
+\begin{algorithm}
+\caption{Optimized QR Decomposition of an Upper Hessenberg Matrix using Givens Rotations}
+\label{alg:qr_hessenberg}
+\begin{algorithmic}[1]
+\Require $\bm{A} \in \mathbb{R}^{m \times n}$ (upper Hessenberg matrix)
+\Ensure $\bm{Q} \in \mathbb{R}^{m \times m}$ (orthogonal), $\bm{R} \in \mathbb{R}^{m \times n}$ (upper triangular)
+
+\State Initialize $\bm{R} \gets \bm{A}$
+\State Initialize $\bm{Q}^T \gets \bm{I}_m$
+\For{$j = n$ to $1$}
+    \For{$i = j+1$ to $m$}
+        \If{$r_{i,j} \neq 0$}
+            \State Compute Givens rotation $\bm{G}_{i,j,\theta}$ to zero out $r_{i,j}$
+            \State Apply $\bm{G}_{i,j,\theta}$ from the left: $\bm{R} \gets \bm{G}_{i,j,\theta} \bm{R}$
+            \State Accumulate $\bm{Q}^T \gets \bm{Q}^T \bm{G}_{i,j,\theta}$
+        \EndIf
+    \EndFor
+\EndFor
+
+\State Compute $\bm{Q} \gets (\bm{Q}^T)^T$
+\State \Return $\bm{Q}, \bm{R}$
+\end{algorithmic}
+\end{algorithm}
+
+Because of the time cost of multiplication like \(\bm{G}_{i,j,\theta}\bm{R}\) and \(\bm{G}_{i,j,\theta} \bm{G}_{m, n, \theta}\) is \(O(n)\), and we need to do this for \(n\) times, so the total time cost is \(O(n^2)\). And the time cost of putting zero if we want full QR factorization is \(O(mn)\).
 
 
 \end{document}
