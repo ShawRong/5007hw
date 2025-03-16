@@ -155,13 +155,38 @@ So the rank-1 approximation is
 
 
 \section*{Question3}
-Let \(\bm{X}\) and \(\bm{Y}\) be two matrices of dimensions \(m \times n\). Consider the optimization problem
-\[
+Let \(\bm{X}\) and \(\bm{Y}\) be two matrices of dimensions \(m \times n\). Consider the optimization problem \[
     \min_{\bm{Q}\in\R^{m\times n}} \|\bm{X} - \bm{QY}\|_F \text{ subject to } \bm{Q}^T\bm{Q} = \bm{I}_m.
 \],
 where \(\|\cdot\|_F\) denotes the Frobenius norm and \(I_m\). is the \(m \times n\) identity matrix. This problem aries when we want to align two datasets \(\bm{X} \text{ and }\bm{Y}\) up to an orthogonal linear transformation. Prove that the solution is given by \(\bm{Q} = \bm{U}\bm{V}^T\), where \(\bm{U}\bm{\Sigma}\bm{V}^T\) is the singular value decomposition of \(\bm{XY}^T\), i.e. \(\bm{X}\bm{Y}^T = \bm{U}\bm{\Sigma}\bm{V}^T\).
 
 \section*{Answer}
+\begin{align*}
+    \|\bm{X} - \bm{Q}\bm{Y}\|_F^2 &= \text{Tr}((\bm{X} - \bm{QY})^T(\bm{X} - \bm{QY})) \\
+    &= \text{Tr}(\bm{X}^T\bm{X}) - 2\text{Tr}(\bm{X}^T\bm{Q}\bm{X}) + \text{Tr}(\bm{Y}^T\bm{Q}^T\bm{QY}) \\
+    &= \text{Tr}(\bm{X}^T\bm{X}) - 2\text{Tr}(\bm{X}^T\bm{Q}\bm{X}) + \text{Tr}(\bm{Y}^T\bm{Y}) \\
+\end{align*}
+So the minimization problem is equivalent to
+\[
+    \max_{\bm{Q}\in\R^{m\times m}} \text{Tr}(\bm{X}^T\bm{Q}\bm{Y}) 
+\]
+\begin{align*}
+    \text{trace}(\bm{Q}\bm{Y}\bm{X}^T) &= \text{trace}(\bm{Q}(\bm{Y}\bm{X}^T)) \\
+\end{align*}
+Consider the SVD of \(\bm{X}\bm{Y}^T = \bm{U}\bm{\Sigma}\bm{V}^T\).
+Let \(\bm{M} = \bm{Y}\bm{X}^T\), and consider the SVD of \(\bm{M} = \bm{V}\bm{\Sigma}\bm{U}^T\).
+\begin{align*}
+    \text{trace}(\bm{Q}\bm{V}\bm{\Sigma}\bm{U}^T) &= \text{trace}(\bm{U}^T\bm{Q}\bm{V}\bm{\Sigma}) \\
+\end{align*}
+Let \(\bm{W} = \bm{U}^T\bm{Q}\bm{V}\), and apparently \(\bm{W}\) is an orthogonal matrix.
+We know the maximum trace is achieved when \(\bm{W}\) is identity matrix, since for the diagonal entries \( \sigma_{ii} \in \bm{\Sigma}, \sigma >= 0\), and for the element \(w_{ij} \in \bm{W}, w_{ij} <= 1\).
+\begin{align*}
+    \max \text{trace}(\bm{W}\bm{\Sigma}) = \text{trace}(\bm{I}\bm{\Sigma}) \\
+    \bm{W} = \bm{U}^T\bm{Q}\bm{V} = \bm{I} \\
+    \bm{Q} = \bm{U}\bm{I}\bm{V}^T = \bm{U}\bm{V}^T 
+\end{align*}
+In conclusion, the solution is given by \(\bm{Q} = \bm{U}\bm{V}^T\).
+
 
 \section*{Question4}
 Let \(\bm{A} \in \R^{m \times n}\) be a matrix with \(m \geq n\) and full column rank, i.e., \(\text{rank}(\bm{A}) = n\). A \textit{Given rotation} matrix \(\bm{G}_{i, j, \theta} \in \R^{n \times n}\) (for indices \(1 \leq i \leq j \leq n\)) is defined by
@@ -230,6 +255,74 @@ For \(m \geq n\), the pattern of nonzero entries in \(\bm{A}\) is depicted as
 
 Since \(\bm{A}\) already contains many zeros in its lower triangular portion, the standard Householder QR algorithm can be optimzed.
 Develop an algorithm using Givens rotations to compute the QR decomposition of an upper Hessenberg matrix \(\bm{A}\). Your algorithm should achieve a computational cost of \(O(n^2)\) for the reduced (economy-size) QR factorization and \(O(mn)\) for the full QR factorization.
+
+
+\section*{(a)}
+\begin{align*}
+    \begin{bmatrix}
+        \bm{I}_{i-1} &  &  &  &  \\
+                     & \cos(\theta) &  & \sin(\theta) & \\
+                     & & \bm{I}_{j - i - 1}& & \\
+         & -\sin(\theta) && \cos(\theta) &\\
+         & &&& \bm{I}_{n-j}
+    \end{bmatrix}
+    \bm{G}_{i, j, \theta}^T \bm{G}_{i, j, \theta} &= \begin{bmatrix}
+        \bm{I}_{i-1} &  &  &  &  \\
+                     & \cos(\theta) &  & -\sin(\theta) & \\
+                     & & \bm{I}_{j - i - 1}& & \\
+         & \sin(\theta) && \cos(\theta) &\\
+         & &&& \bm{I}_{n-j}
+    \end{bmatrix} \\
+    &= 
+    \begin{bmatrix}
+        \bm{I}_{i-1} &  &  &  &  \\
+                     & 1 &  & 0 & \\
+                     & & \bm{i}_{j - i - 1}& & \\
+         & 0 && 1 &\\
+         & &&& \bm{I}_{n-j}
+    \end{bmatrix} = \bm{I}_n
+\end{align*}
+
+\section*{(b)}
+We know,
+\begin{align*}
+    (\bm{G}_{i,j,\theta} \bm{v})_i = \cos(\theta)v_i - \sin(\theta)v_j
+    (\bm{G}_{i,j,\theta} \bm{v})_j = \sin(\theta)v_i + \cos(\theta)v_j
+\end{align*}
+From 
+\[
+    (\bm{G}_{i,j,\theta} \bm{v})_i = \sqrt{v_i^2 + v_j^2} 
+    (\bm{G}_{i,j,\theta} \bm{v})_j = 0
+\]
+We can derive that
+\begin{align*}
+    \cos(\theta) = \frac{v_i}{\sqrt{v_i^2 + v_j^2}} \\
+    \sin(\theta) = -\frac{v_j}{\sqrt{v_i^2 + v_j^2}}    
+\end{align*}
+For any vector \(\bm{v}\), apply \(\bm{G}_{i,j,\theta}\) with \(\theta\) such that:
+\begin{align*}
+    \cos(\theta) = \frac{v_i}{\sqrt{v_i^2 + v_j^2}} \\
+    \sin(\theta) = -\frac{v_j}{\sqrt{v_i^2 + v_j^2}}
+\end{align*}
+This yields:
+\[
+    \bm{G}_{i,j,\theta}\bm{v} = \begin{bmatrix}
+        v_1 \\
+        \vdots \\
+        v_{i-1} \\
+        \sqrt{v_i^2 + v_j^2} \\
+        v_{i+1} \\
+        \vdots \\
+        v_{j-1} \\
+        0 \\
+        v_{j+1} \\
+        \vdots \\
+        v_n
+    \end{bmatrix}
+\]
+
+\section*{(c)}
+
 
 
 \end{document}
