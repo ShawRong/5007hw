@@ -1,0 +1,74 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{geometry}
+\usepackage{bm} 
+\usepackage{algorithm}
+\usepackage{algorithmicx}
+\usepackage{algpseudocode}
+\newcommand{\R}{\mathbb{R}}
+\geometry{a4paper, margin=1in}
+
+\title{MSBD 5007 HW2}
+\author{RONG Shuo}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\section*{Question1}
+Determine the convexity of the following functions, where \(\bm{x} \in \R^n \) and \(\bm{X} \in \mathbb{S}_{++}^{n}\)(the set of symmetric positive definite matrices). Justify your answer.
+
+(a) \(f(\bm{x}) = \text{log}(e^{x_1} + e^{x_2} + \cdots + e^{x_n})\).
+
+(b) \(f(\bm{X}) = \text{log} \text{det}(\bm{X})\).
+
+
+\section*{Question2}
+Consider the linear system \(\bm{Ax} = \bm{b}\), with \(\bm{A} = \begin{bmatrix}
+    2 & 1\\
+    1 & 4
+\end{bmatrix}\) and \(\bm{b} \in \begin{bmatrix}
+    2 \\
+    -4
+\end{bmatrix}\), and the initial guess \(\bm{x}_0 = \begin{bmatrix}
+    0 \\
+    0
+\end{bmatrix}\).
+
+(a) Present the first two update iterations using the \textbf{steepest descent algorithm}. 
+
+(b) Present the first two updated iterations using the \textbf{conjugate gradient algorithm}.
+
+\section*{Question3}
+Let \(f: \R^n \to \R\) be a twice continuously differentiable functions. Suppose that for every \(\bm{x} \in \R^n\), the eigenvalues of the Hessian matrix \(\nabla^2 f(\bm{X})\) lie uniformly in the interval \([\textit{m, M}]\) with \(0 < m \leq M < \infty\).
+
+Prove that:
+
+(a) The function \(f\) has a unique global minimizer \(\bm{x}^{*}\).
+
+(b) For all \(\bm{x} \in \R^n\), the following inequality holds:
+\begin{align*}
+    \frac{1}{2M} \|\nabla f(x)\|^2 \leq f(\bm{x}) - f(\bm{x}^*) \leq \frac{1}{2m} \|\nabla f(\bm{x})\|^2
+\end{align*}
+
+\section*{Question4}
+Consider the optimization problem \(\text{min}_{\bm{x} \in \R^n} f(\bm{x})\), where \(f: \R^n \to \R\) is a continuously differentiable function. To develop a weighted gradient descent method, let \(\bm{W} \in \R^{n \times n}\) be a symmetric positive definite (SPD) matrix. Denote by \(\bm{W}^{\frac{1}{2}}\) the unique SPD square root of \(\bm{W}\) (i.e., \((\bm{W}^{\frac{1}{2}})^2 = \bm{W}\)) and by \(\bm{W}^{-\frac{1}{2}}\) its inverse. Given the current iterate \(\bm{x}^{(k)}\), define the next iterate \(\bm{x}^{(k + 1)}\) as the solution of the following constrained optimization problem:
+\begin{align*}
+    \text{min}_{\bm{x} \in \R^n}f(\bm{x}^{(k)}) + \langle \nabla f(\bm{x}^{(k)}), \bm{x} - \bm{x}^{(k)}\rangle \\
+    \text{subject to } \|\bm{W}^{\frac{1}{2}} (\bm{x} - \bm{x}^(k))\|_2 \leq \alpha_k\|\bm{W}^{-\frac{1}{2}} \nabla f(\bm{x}^(k))\|_2
+\end{align*}
+where  \(\alpha_k > 0\) is a step-size parameter.
+
+Answer the following questions:
+
+(a) Derive an explicit formula for \(\bm{x}^{(k + 1)}\)
+
+(b) Prove that \(\bm{x}^{(k + 1)}\) is equivalently the unique minimizer of the unconstrained quadratic problem:
+\begin{align*}
+    \text{min}_{\bm{x} \in \R^n} \left \{ \nabla f(\bm{x}^{(k)}) + \langle f(\bm{x}^{(k)}), \bm{x} - \bm{x}^{(k)} \rangle + \frac{1}{2\alpha_k} \|\bm{W}^{\frac{1}{2}} (\bm{x} - \bm{x}^{(k)})\|_2^2 \right \}
+\end{align*}
+
+
+\end{document}
