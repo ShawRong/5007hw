@@ -131,10 +131,10 @@ Find the best rank-1 approximation with respect to the Frobenius norm to the mat
 
 We need solve the equation, 
 \begin{align*}
-    -(\phi - 16)(\phi - 1)^2 = 0
+    -(\lambda - 16)(\lambda - 1)^2 = 0
 \end{align*}
-The roots are \(\phi = 16, 1, 1\). 
-We can calculate the normalized eigenvectors of \(\phi = 16\) is \(\frac{1}{\sqrt{3}}\begin{bmatrix}
+The roots are \(\lambda = 16, 1, 1\). 
+We can calculate the normalized eigenvectors of \(\lambda = 16\) is \(\frac{1}{\sqrt{3}}\begin{bmatrix}
     1 \\
     1 \\
     1 \\
@@ -262,6 +262,7 @@ Develop an algorithm using Givens rotations to compute the QR decomposition of a
 
 \section*{(a)}
 \begin{align*}
+    \bm{G}_{i, j, \theta}^T \bm{G}_{i, j, \theta} &=
     \begin{bmatrix}
         \bm{I}_{i-1} &  &  &  &  \\
                      & \cos(\theta) &  & \sin(\theta) & \\
@@ -269,7 +270,7 @@ Develop an algorithm using Givens rotations to compute the QR decomposition of a
          & -\sin(\theta) && \cos(\theta) &\\
          & &&& \bm{I}_{n-j}
     \end{bmatrix}
-    \bm{G}_{i, j, \theta}^T \bm{G}_{i, j, \theta} &= \begin{bmatrix}
+    \begin{bmatrix}
         \bm{I}_{i-1} &  &  &  &  \\
                      & \cos(\theta) &  & -\sin(\theta) & \\
                      & & \bm{I}_{j - i - 1}& & \\
