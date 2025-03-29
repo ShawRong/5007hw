@@ -24,6 +24,54 @@ Determine the convexity of the following functions, where \(\bm{x} \in \R^n \) a
 
 (b) \(f(\bm{X}) = \text{log} \text{det}(\bm{X})\).
 
+\section*{Answer}
+\subsection*{(a)}
+\begin{align*}
+    \nabla f(\bm{x}) = (\frac{\partial f}{\partial x_1}, \frac{\partial f}{\partial x_2}, \cdots, \frac{\partial f}{\partial x_n})
+\end{align*}
+\begin{align*}
+    \frac{\partial f}{\partial x_i} &= \frac{1}{e^{x_1} + e^{x_1} + \cdots + e^{x_1}} \times \frac{\partial }{\partial x_i} (e^{x_1} + e^{x_2} + \cdots + e^{x_n}) \\
+    &=  \frac{e^{x_i}}{e^{x_1} + e^{x_2} + \cdots + e^{x_n}} 
+\end{align*}
+Therefore,
+\begin{align*}
+    \nabla f(\bm{x}) = (\frac{e^{x_1}}{\sum_{i = 1}^{n} e^{x_i}}, \frac{e^{x_2}}{\sum_{i = 1}^{n} e^{x_i}}, \cdots ,\frac{e^{x_1}}{\sum_{i = n}^{n} e^{x_i}})
+\end{align*}
+We know,
+\begin{align*}
+    \bm{H}_{ij} &= \frac{\partial^2 f}{\partial x_i \partial y_i} \\
+    \bm{H}_{ii} &= \frac{}{\partial x_i} (\frac{e^{x_i}}{S}) = \frac{e^{x_i} (S - e^{x_i})}{S^2} \text{    if \(i = j\) } \\ 
+    \bm{H}_{ij} &= -\frac{e^{x_i}e^{x_j}}{S^2} \text{    if \(i \neq j\) } \\
+    \nabla^2 f(\bm{x}) &= \frac{1}{S}\text{diag}(\bm{e}) - \frac{1}{S^2}\bm{e}\bm{e}^T
+\end{align*}
+where \( \bm{e} = (e^{x_1},  e^{x_2}, \cdots, e^{x_n} )^T \), and \(S = \sum_{i = 1}^{n} e^{x_i}\)
+
+\begin{align*}
+    \bm{z}\nabla^2 f(\bm{x})\bm{z}^T &= \frac{1}{S}\sum_{i=1}^{n}e^{x_i}z_i^2 - \frac{1}{S^2}(\sum_{i=1}^{n}e^{x_i}z_i)^2 \\
+    (\sum_{i=1}^{n}e^{x_i}z_i)^2 &\leq (\sum_{i=1}^{n}e^{x_i}z_i^2)(\sum_{i=1}^{n}e^{x_i}) \\
+    \frac{1}{S}\sum_{i=1}^{n}e^{x_i}z_i^2 &\geq \frac{1}{S^2}(\sum_{i=1}^{n}e^{x_i}z_i)^2 \\
+    \bm{z}\nabla^2 f(\bm{x})\bm{z}^T &\geq 0
+\end{align*}
+Thus, we prove that Hessian is positive semi-definite, so we can conclude \(f(\bm{x})\) is convex.
+
+\subsection*{(b)}
+Let \(\bm{X} \in \mathbb{S}_{++}^{n}\) and \(\bm{V} \in \mathbb{S}^n\), we define \(g(t) = \text{log} \text{det} (\bm{X} + t\bm{V})\), where \(\bm{X} + t\bm{V}\) is symmetric, positive and definite.
+\begin{align*}
+    g(t) &= \text{log} \text{det} (\bm{X} + t\bm{V}) \\
+    &= \text{log} \text{det} (\bm{X}^{\frac{1}{2}}(\bm{I} + t\bm{X}^{-\frac{1}{2}} \bm{V} \bm{X}^{-\frac{1}{2}})\bm{X}^{\frac{1}{2}}) \\
+    &= \text{log} \text{det} \bm{X} + \text{log} \text{det} (\bm{I} + t\bm{\Lambda}) \\
+    &= \text{log} \text{det} \bm{X} + \sum_{i=1}^{n} \text{log}(1 + t\lambda_i)
+\end{align*}
+where \(\lambda_i\) is the eigenvalues of \(\Lambda\)
+\begin{align*}
+    g''(t) = \sum_{i=1}^{n} \frac{-\lambda_i^2}{(1 + t \lambda_i)^2} \leq 0
+\end{align*}
+Thus \(g''(t) \leq 0\) for all \(t\) where \(\bm{X} + t\bm{V}\) is symmetric, positive and definite, so \(g(t)\) is concave.
+Since \(g(t)\) is concave for any direction, \(f(X) = \text{log} \text{det} \bm{X}\) is concave on \(\mathbb{S}_{++}^{n}\).
+
+
+
+
 
 \section*{Question2}
 Consider the linear system \(\bm{Ax} = \bm{b}\), with \(\bm{A} = \begin{bmatrix}
@@ -40,6 +88,78 @@ Consider the linear system \(\bm{Ax} = \bm{b}\), with \(\bm{A} = \begin{bmatrix}
 (a) Present the first two update iterations using the \textbf{steepest descent algorithm}. 
 
 (b) Present the first two updated iterations using the \textbf{conjugate gradient algorithm}.
+
+
+\section*{Answer}
+\subsection*{(a)}
+We know if we want use steepest descent algorithm to solve the linear system, we need:
+\begin{align*}
+    \alpha_k = \frac{\bm{r}_k^T\bm{r}_k}{\bm{r}_k^T\bm{A}\bm{r}_k}
+\end{align*}
+where \(\bm{r}_{k+1} = \bm{r}_k - \alpha_k \bm{A} \bm{r}_k\)
+
+\begin{align*}
+    \bm{r}_0 &= \bm{b} - \bm{A}\bm{x}_0 = \begin{bmatrix}
+        2\\
+        -4
+    \end{bmatrix} \\
+    \alpha_0 &= \frac{5}{14} \\
+    \bm{x}_1 &= \begin{bmatrix}
+        0\\
+        0
+    \end{bmatrix} + \frac{5}{14}\begin{bmatrix}
+        2 \\
+        4
+    \end{bmatrix} = \begin{bmatrix}
+        \frac{5}{7} \\
+        -\frac{10}{7}
+    \end{bmatrix}\\
+    \bm{r}_1 &= \begin{bmatrix}
+        0\\
+        0
+    \end{bmatrix} - \frac{5}{14}\begin{bmatrix}
+        2 \\
+        4
+    \end{bmatrix} = \begin{bmatrix}
+        2\\
+        1
+    \end{bmatrix}
+\end{align*}
+next iteration:
+\begin{align*}
+    \alpha_1 &= \frac{5}{16} \\
+    \bm{x}_2 &= \begin{bmatrix}
+        \frac{5}{7} \\
+        -\frac{10}{7}
+    \end{bmatrix} + \frac{5}{16} \begin{bmatrix}
+        2 \\
+        1
+    \end{bmatrix} = \begin{bmatrix}
+        \frac{75}{56} \\
+        -\frac{125}{112}
+    \end{bmatrix} \\
+    \bm{r}_2 &= \begin{bmatrix}
+        2 \\
+        1
+    \end{bmatrix} - \frac{5}{16}\begin{bmatrix}
+        5 \\
+        6
+    \end{bmatrix} = \begin{bmatrix}
+        \frac{7}{16} \\
+        -\frac{14}{16}
+    \end{bmatrix}
+\end{align*}
+In conclusion, \(\bm{x}_1 = \begin{bmatrix}
+    \frac{5}{7} \\
+    -\frac{10}{7}
+\end{bmatrix} \bm{x}_2 = \begin{bmatrix}
+    \frac{75}{56} \\
+    -\frac{125}{112}
+\end{bmatrix}\)
+
+\subsection*{(b)}
+
+
 
 \section*{Question3}
 Let \(f: \R^n \to \R\) be a twice continuously differentiable functions. Suppose that for every \(\bm{x} \in \R^n\), the eigenvalues of the Hessian matrix \(\nabla^2 f(\bm{X})\) lie uniformly in the interval \([\textit{m, M}]\) with \(0 < m \leq M < \infty\).
