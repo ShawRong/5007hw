@@ -271,5 +271,42 @@ Answer the following questions:
     \text{min}_{\bm{x} \in \R^n} \left \{ \nabla f(\bm{x}^{(k)}) + \langle f(\bm{x}^{(k)}), \bm{x} - \bm{x}^{(k)} \rangle + \frac{1}{2\alpha_k} \|\bm{W}^{\frac{1}{2}} (\bm{x} - \bm{x}^{(k)})\|_2^2 \right \}
 \end{align*}
 
+\section*{Answer}
+\subsection*{(a)}
+We know the CS inequality, that:
+\begin{align*}
+    |\langle \bm{u}, \bm{v} \rangle| \leq \|\bm{u}\|_{\bm{W}^{\frac{1}{2}}}^* \cdot \|\bm{v}\|_{\bm{W}^{\frac{1}{2}}}
+\end{align*}
+where \(\|\bm{u}\|_{\bm{W}^{\frac{1}{2}}}^* = \|\bm{W}^{-\frac{1}{2}} \bm{u}\|_2\)
+
+Let \(\bm{d} = \bm{x} - \bm{x}^{(k)}\), the problem is equivalent to:
+\begin{align*}
+    \text{min}_{\bm{d}} \langle \nabla f(\bm{x}^{(k)}), \bm{d} \rangle
+\end{align*}
+that subject to \(\|\bm{W}^{\frac{1}{2} }\bm{d}\|_2 \leq \alpha_k\|\bm{W}^{-\frac{1}{2}} \nabla f(\bm{x}^{(k)})\|_2\)
+
+Using this inequality, we can get:
+\begin{align*}
+    |\langle \nabla f(\bm{x}^{(k)}), \bm{d}\rangle| \leq \|\bm{W}^{\frac{1}{2} }\bm{d}\|_2 \alpha_k\|\bm{W}^{-\frac{1}{2}} \nabla f(\bm{x}^{(k)})\|_2
+\end{align*}
+
+We need \(\bm{u}\) and \(\bm{v}\) to be linear dependent to get the minimum. s.t.
+\begin{align*}
+    \bm{W}^{\frac{1}{2} }\bm{d}  = k \bm{W}^{-\frac{1}{2}} \nabla f(\bm{x}^{(k)})
+\end{align*}
+We can derive \(\bm{d} = k \bm{W}^{-1} \nabla f(\bm{x}^{(k)})\)
+
+And we need:
+\begin{align*}
+    \|\bm{W}^{\frac{1}{2}}k \bm{W}^{-1} \nabla f(\bm{x}^{(k)})\|_2 = \alpha_k\|\bm{W}^{-\frac{1}{2}} \nabla f(\bm{x}^{(k)})\|_2
+\end{align*}
+So we get \(k = \alpha_k\). Therefore, we get the answer:
+\begin{align*}
+    \bm{x}^{(k + 1)} = \bm{x}^{(k)} - \alpha_k \bm{W}^{-1} \nabla f(\bm{x}^{(k)})
+\end{align*}
+
+
+\subsection*{(b)}
+
 
 \end{document}
