@@ -59,15 +59,28 @@ Let \(\bm{X} \in \mathbb{S}_{++}^{n}\) and \(\bm{V} \in \mathbb{S}^n\), we defin
 \begin{align*}
     g(t) &= \text{log} \text{det} (\bm{X} + t\bm{V}) \\
     &= \text{log} \text{det} (\bm{X}^{\frac{1}{2}}(\bm{I} + t\bm{X}^{-\frac{1}{2}} \bm{V} \bm{X}^{-\frac{1}{2}})\bm{X}^{\frac{1}{2}}) \\
+    &= \text{log}(\text{det}  \bm{X}^{\frac{1}{2}} \cdot \text{det} ((\bm{I} + t\bm{X}^{-\frac{1}{2}} \bm{V} \bm{X}^{-\frac{1}{2}})) \cdot \text{det}\bm{X}^{\frac{1}{2}}) \\
     &= \text{log} \text{det} \bm{X} + \text{log} \text{det} (\bm{I} + t\bm{\Lambda}) \\
     &= \text{log} \text{det} \bm{X} + \sum_{i=1}^{n} \text{log}(1 + t\lambda_i)
 \end{align*}
-where \(\lambda_i\) is the eigenvalues of \(\Lambda\)
+where \(\lambda_i\) is the eigenvalues of \(\Lambda\), and \(\bm{X}^{-\frac{1}{2}} \bm{V} \bm{X}^{-\frac{1}{2}} = \bm{\Lambda}\) 
 \begin{align*}
     g''(t) = \sum_{i=1}^{n} \frac{-\lambda_i^2}{(1 + t \lambda_i)^2} \leq 0
 \end{align*}
 Thus \(g''(t) \leq 0\) for all \(t\) where \(\bm{X} + t\bm{V}\) is symmetric, positive and definite, so \(g(t)\) is concave.
 Since \(g(t)\) is concave for any direction, \(f(X) = \text{log} \text{det} \bm{X}\) is concave on \(\mathbb{S}_{++}^{n}\).
+
+Let's denote \(\bm{V} = (\bm{Y} - \bm{X})\). We have \(g(t) = \text{log} \text{det} (\bm{X} + t(\bm{Y} - \bm{X})) \)
+\begin{align*}
+    g(0) = \text{log} \text{det} (\bm{X})  \\
+    g(1) = \text{log} \text{det} (\bm{Y}) 
+\end{align*}
+By concavity of \(g(t)\), we know:
+\begin{align*}
+    g(t) &\geq (1 - t) g(0) + t g(1) \\
+    \text{log} \text{det} (\bm{X} + t(\bm{Y} - \bm{X})) &\geq (1 - t) \bm{X} + t \bm{Y} \\
+    \text{log} \text{det} (t\bm{Y} + (1 - t)\bm{X}) &\geq t \bm{Y} + (1 - t) \bm{X}  \\
+\end{align*}
 
 
 
