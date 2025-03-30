@@ -293,11 +293,10 @@ Answer the following questions:
 
 \section*{Answer}
 \subsection*{(a)}
-We know the CS inequality, that:
+We know the inequality, that:
 \begin{align*}
-    |\langle \bm{u}, \bm{v} \rangle| \leq \|\bm{u}\|_{\bm{W}^{\frac{1}{2}}}^* \cdot \|\bm{v}\|_{\bm{W}^{\frac{1}{2}}}
+    |\langle \bm{u}, \bm{v} \rangle| \leq \|\bm{W}^{-\frac{1}{2}} \bm{u}\|_2 \cdot \|\bm{W}^{\frac{1}{2}} \bm{v}\|_2
 \end{align*}
-where \(\|\bm{u}\|_{\bm{W}^{\frac{1}{2}}}^* = \|\bm{W}^{-\frac{1}{2}} \bm{u}\|_2\)
 
 Let \(\bm{d} = \bm{x} - \bm{x}^{(k)}\), the problem is equivalent to:
 \begin{align*}
@@ -327,7 +326,7 @@ So we get \(k = \alpha_k\). Therefore, we get the answer:
 
 
 \subsection*{(b)}
-We know the problem can be treat as:
+We know the problem can be treat as(since \(f(\bm{x}^{(k)})\) is constant):
 \begin{align*}
     \text{min}_{\bm{d}} \{\langle \nabla f(\bm{x}^{(k)}), \bm{d}\rangle + \frac{1}{2\alpha_k} \|\bm{W}^{\frac{1}{2}}\bm{d}\|_2^2\} \\
     \text{min}_{\bm{d}} \{\nabla f(\bm{x}^{(k)})^T\bm{d} + \frac{1}{2\alpha_k} \bm{d}^T\bm{W}\bm{d}\}
