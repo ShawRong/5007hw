@@ -117,7 +117,7 @@ where \(\bm{r}_{k+1} = \bm{r}_k - \alpha_k \bm{A} \bm{r}_k\)
         -4
     \end{bmatrix} \\
     \alpha_0 &= \frac{5}{14} \\
-    \bm{x}_1 &= \begin{bmatrix}
+    \bm{x}_1 &= \bm{x}_0 + \alpha_0 \bm{r}_0 =  \begin{bmatrix}
         0\\
         0
     \end{bmatrix} + \frac{5}{14}\begin{bmatrix}
@@ -127,7 +127,7 @@ where \(\bm{r}_{k+1} = \bm{r}_k - \alpha_k \bm{A} \bm{r}_k\)
         \frac{5}{7} \\
         -\frac{10}{7}
     \end{bmatrix}\\
-    \bm{r}_1 &= \begin{bmatrix}
+    \bm{r}_1 &= \bm{b} - \bm{A}\bm{x}_1 = \begin{bmatrix}
         0\\
         0
     \end{bmatrix} - \frac{5}{14}\begin{bmatrix}
@@ -141,7 +141,7 @@ where \(\bm{r}_{k+1} = \bm{r}_k - \alpha_k \bm{A} \bm{r}_k\)
 next iteration:
 \begin{align*}
     \alpha_1 &= \frac{5}{16} \\
-    \bm{x}_2 &= \begin{bmatrix}
+    \bm{x}_2 &= \bm{x}_1 + \alpha_1 \bm{r}_1 = \begin{bmatrix}
         \frac{5}{7} \\
         -\frac{10}{7}
     \end{bmatrix} + \frac{5}{16} \begin{bmatrix}
@@ -151,16 +151,6 @@ next iteration:
         \frac{75}{56} \\
         -\frac{125}{112}
     \end{bmatrix} \\
-    \bm{r}_2 &= \begin{bmatrix}
-        2 \\
-        1
-    \end{bmatrix} - \frac{5}{16}\begin{bmatrix}
-        5 \\
-        6
-    \end{bmatrix} = \begin{bmatrix}
-        \frac{7}{16} \\
-        -\frac{14}{16}
-    \end{bmatrix}
 \end{align*}
 In conclusion, \(\bm{x}_1 = \begin{bmatrix}
     \frac{5}{7} \\
@@ -189,7 +179,7 @@ next iteration,
         1
     \end{bmatrix} \\
     \beta_0 &= \frac{\bm{r}_1^T \bm{r}_1}{\bm{r}_0^T \bm{r}_0} = \frac{5}{20} = \frac{1}{4} \\
-    \bm{p}_1 &= \bm{r}_1 + \beta_0\bm{p}_0 = \begin{bmatrix}
+    \bm{p}_1 &= \bm{r}_1 + \beta_0\bm{r}_0 = \begin{bmatrix}
         \frac{5}{2} \\
         0
     \end{bmatrix}\ \\
@@ -200,6 +190,13 @@ next iteration,
     \end{bmatrix}
 \end{align*}
 
+In conclusion, \(\bm{x}_1 = \begin{bmatrix}
+    \frac{5}{7} \\
+    -\frac{10}{7}
+\end{bmatrix} \bm{x}_2 = \begin{bmatrix}
+    \frac{12}{7} \\
+    -\frac{10}{7}
+\end{bmatrix}\)
 
 
 \section*{Question3}
