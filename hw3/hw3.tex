@@ -158,6 +158,34 @@ In conclusion, \(\bm{x}_1 = \begin{bmatrix}
 \end{bmatrix}\)
 
 \subsection*{(b)}
+\begin{align*}
+    \bm{r}_0 &= \bm{b} - \bm{A}\bm{x}_0 = \begin{bmatrix}
+        2 \\
+        -4
+    \end{bmatrix} \\
+    \alpha_0 &= \frac{\bm{r}_0^T\bm{r}_0}{\bm{r}_0^T \bm{A} \bm{r}_0} = \frac{5}{14} \\ 
+    \bm{x}_1 &= \begin{bmatrix}
+        \frac{5}{7} \\
+        -\frac{10}{7}
+    \end{bmatrix}
+\end{align*}
+next iteration,
+\begin{align*}
+    \bm{r}_1 &= \bm{r}_0 - \alpha_0 \bm{A} \bm{r}_0 = \begin{bmatrix}
+        2 \\
+        1
+    \end{bmatrix} \\
+    \beta_0 &= \frac{\bm{r}_1^T \bm{r}_1}{\bm{r}_0^T \bm{r}_0} = \frac{5}{20} = \frac{1}{4} \\
+    \bm{p}_1 &= \bm{r}_1 + \beta_0\bm{p}_0 = \begin{bmatrix}
+        \frac{5}{2} \\
+        0
+    \end{bmatrix}\ \\
+    \alpha_1 &= \frac{\bm{r}_1^T\bm{r}_1}{\bm{p}_1^T \bm{A} \bm{p}_1} = \frac{2}{5} \\
+    \bm{x}_2 &= \bm{x}_1 + \alpha_1 \bm{p}_1 = \begin{bmatrix}
+        \frac{12}{7} \\
+        -\frac{10}{7}
+    \end{bmatrix}
+\end{align*}
 
 
 
@@ -172,6 +200,59 @@ Prove that:
 \begin{align*}
     \frac{1}{2M} \|\nabla f(x)\|^2 \leq f(\bm{x}) - f(\bm{x}^*) \leq \frac{1}{2m} \|\nabla f(\bm{x})\|^2
 \end{align*}
+
+\section*{Answer}
+\subsection*{(a)}
+We know the second order sufficient condition:
+\begin{align*}
+    \nabla^2 f(\bm{x}) \succ 0 \implies \text{ \(f\) strictly convex}
+\end{align*}
+Since all eigenvalues of \(\nabla^2 f(\bm{x}) \geq m > 0\), we know
+\begin{align*}
+    &\bm{v} \nabla^2 f(\bm{x}) \bm{v} \geq m\|\bm{v}\|^2 > 0 \text{ for any non-zero vector \(\bm{v}\)}  \\
+    &\nabla^2 f(\bm{x}) \succ 0
+\end{align*} 
+Therefore, \(f\) is strictly convex.
+And we know the Theorem that for an optimization problem, where \(f: \R^n \to \R\) is strictly convex on \(\Omega\) and \(\Omega\) is a convex set. Then the optimal solution must be unique.
+
+To show \(f\) is coercive, we know
+\begin{align*}
+    &f(\bm{y}) = f(\bm{x}) + \nabla f(\bm{x})^T (\bm{y} - \bm{x}) + \frac{1}{2} (\bm{y} - \bm{x})^T \nabla^2 f(\bm{z}) (\bm{y} - \bm{x}) \\
+    &(\bm{y} - \bm{x})^T \nabla^2 f(\bm{z}) (\bm{y} - \bm{x}) \geq m \|\bm{y} - \bm{x}\|^2 \\
+    &f(\bm{y}) \geq f(\bm{x}) + \nabla f(\bm{x})^T (\bm{y} - \bm{x}) + \frac{1}{2} m \|\bm{y} - \bm{x}\|^2  \\
+    &f(\bm{y}) \geq f(\bm{0}) + \nabla f(\bm{0})^T \bm{y} + \frac{m}{2} \|\bm{y}\|^2
+\end{align*}
+Therefore, as \(\|\bm{y}\| \to \infty\), \(f(\bm{y}) \to \infty\). Hence, \(f\) is coercive.
+In conclusion, there exists a optimal solution(coercive), and it's unique(strictly convex).
+
+\subsection*{(b)}
+We know
+\begin{align*}
+    &f(\bm{y}) \geq f(\bm{x}) + \nabla f(\bm{x})^T (\bm{y} - \bm{x}) + \frac{1}{2} m \|\bm{y} - \bm{x}\|^2  \\
+    &f(\bm{x}^*) \geq f(\bm{x}) + \nabla f(\bm{x})^T (\bm{x}^* - \bm{x}) + \frac{1}{2} m \|\bm{x}^* - \bm{x}\|^2  \\
+    &f(\bm{x}) - f(\bm{x}^*) \leq  \nabla f(\bm{x})^T (\bm{x} - \bm{x}^*) - \frac{1}{2} m \|\bm{x} - \bm{x}^*\|^2  \\
+\end{align*}
+According to Cauchy-Schwarz inequality, we know:
+\begin{align*}
+    \nabla f(\bm{x})^T \|\bm{x} - \bm{x}^*\| &\leq \|\nabla f(\bm{x})\| \|\bm{x} - \bm{x}^*\|  \\
+    f(\bm{x}) - f(\bm{x}^*) &\leq  \|\nabla f(\bm{x})\| \|\bm{x} - \bm{x}^*\| - \frac{1}{2} m \|\bm{x} - \bm{x}^*\|^2  \\
+\end{align*}
+We know if \(\|\bm{x} - \bm{x}^*\| = \frac{1}{m} \|\nabla f(\bm{x})\|\), we get the maximum.
+\begin{align*}
+    f(\bm{x}) - f(\bm{x}^*) &\leq  \|\nabla f(\bm{x})\| \frac{1}{m} \|\nabla f(\bm{x})\| - \frac{1}{2} m (\frac{1}{m} \|\nabla f(\bm{x})\|)^2 = \frac{1}{2m} \|\nabla f(\bm{x})\|^2 \\
+\end{align*}
+Therefore, \( f(\bm{x}) - f(\bm{x}^*) \leq \frac{1}{2m} \|\nabla f(\bm{x})\|^2 \)
+
+And we know:
+\begin{align*}
+    &f(\bm{y}) \leq f(\bm{x}) + \nabla f(\bm{x})^T (\bm{y} - \bm{x}) + \frac{M}{2} \|\bm{y} - \bm{x}\|^2 \\
+    & \bm{y} =  \bm{x} - \frac{1}{M} \nabla f(\bm{x}) \\
+    & f(\bm{x} - \frac{1}{M} \nabla f(\bm{x})) \leq f(\bm{x}) + \nabla f(\bm{x})^T (- \frac{1}{M} \nabla f(\bm{x})) + \frac{M}{2} \|\frac{1}{M} \nabla f(\bm{x})\|^2 \\
+    & f(\bm{x}) + \nabla f(\bm{x})^T (- \frac{1}{M} \nabla f(\bm{x})) + \frac{M}{2} \|\frac{1}{M} \nabla f(\bm{x})\|^2 = f(\bm{x}) - \frac{1}{2M}\|\nabla f(\bm{x})\|^2 \\
+    & f(\bm{x}^*) \leq f(\bm{x} - \frac{1}{M} \nabla f(\bm{x})) \leq f(\bm{x}) - \frac{1}{2M}\|\nabla f(\bm{x})\|^2
+\end{align*}
+
+Therefore \(f(\bm{x}) - f(\bm{x}^*) \geq \frac{1}{2M}\|\nabla f(\bm{x})\|^2\)
 
 \section*{Question4}
 Consider the optimization problem \(\text{min}_{\bm{x} \in \R^n} f(\bm{x})\), where \(f: \R^n \to \R\) is a continuously differentiable function. To develop a weighted gradient descent method, let \(\bm{W} \in \R^{n \times n}\) be a symmetric positive definite (SPD) matrix. Denote by \(\bm{W}^{\frac{1}{2}}\) the unique SPD square root of \(\bm{W}\) (i.e., \((\bm{W}^{\frac{1}{2}})^2 = \bm{W}\)) and by \(\bm{W}^{-\frac{1}{2}}\) its inverse. Given the current iterate \(\bm{x}^{(k)}\), define the next iterate \(\bm{x}^{(k + 1)}\) as the solution of the following constrained optimization problem:
