@@ -307,6 +307,23 @@ So we get \(k = \alpha_k\). Therefore, we get the answer:
 
 
 \subsection*{(b)}
+We know the problem can be treat as:
+\begin{align*}
+    \text{min}_{\bm{d}} \{\langle \nabla f(\bm{x}^{(k)}), \bm{d}\rangle + \frac{1}{2\alpha_k} \|\bm{W}^{\frac{1}{2}}\bm{d}\|_2^2\} \\
+    \text{min}_{\bm{d}} \{\nabla f(\bm{x}^{(k)})^T\bm{d} + \frac{1}{2\alpha_k} \bm{d}^T\bm{W}\bm{d}\}
+\end{align*}
+Let \(\Phi(\bm{d}) = \nabla f(\bm{x}^{(k)})^T\bm{d} + \frac{1}{2\alpha_k} \bm{d}^T\bm{W}\bm{d}\)
+
+It's easy to find the Hessian matrix \(\bm{H} = \frac{1}{\alpha_k} \bm{W}\)
+, and since \(\alpha_k > 0\) and \(\bm{W}\) is SPD, so we know \(\Phi(\bm{d})\) is strictly convex.
+
+\begin{align*}
+    \nabla \Phi(\bm{d}) &= \nabla f(\bm{x}^{(k)}) + \frac{1}{\alpha_k} \bm{W}\bm{d} = 0\\
+    \bm{d} &= -\alpha_k \bm{W}^{-1} \nabla f(\bm{x}^{(k)}) 
+\end{align*}
+Therefore, \(\bm{x}^{(k + 1)}\) is equivalently the unique minimizer of this unconstrained quadratic problem.
+
+
 
 
 \end{document}
