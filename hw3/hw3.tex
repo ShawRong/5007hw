@@ -35,12 +35,12 @@ Determine the convexity of the following functions, where \(\bm{x} \in \R^n \) a
 \end{align*}
 Therefore,
 \begin{align*}
-    \nabla f(\bm{x}) = (\frac{e^{x_1}}{\sum_{i = 1}^{n} e^{x_i}}, \frac{e^{x_2}}{\sum_{i = 1}^{n} e^{x_i}}, \cdots ,\frac{e^{x_1}}{\sum_{i = n}^{n} e^{x_i}})
+    \nabla f(\bm{x}) = (\frac{e^{x_1}}{\sum_{i = 1}^{n} e^{x_i}}, \frac{e^{x_2}}{\sum_{i = 1}^{n} e^{x_i}}, \cdots ,\frac{e^{x_n}}{\sum_{i = n}^{n} e^{x_i}})
 \end{align*}
 We know,
 \begin{align*}
     \bm{H}_{ij} &= \frac{\partial^2 f}{\partial x_i \partial y_i} \\
-    \bm{H}_{ii} &= \frac{}{\partial x_i} (\frac{e^{x_i}}{S}) = \frac{e^{x_i} (S - e^{x_i})}{S^2} \text{    if \(i = j\) } \\ 
+    \bm{H}_{ii} &= \frac{\partial}{\partial x_i} (\frac{e^{x_i}}{S}) = \frac{e^{x_i} (S - e^{x_i})}{S^2} \text{    if \(i = j\) } \\ 
     \bm{H}_{ij} &= -\frac{e^{x_i}e^{x_j}}{S^2} \text{    if \(i \neq j\) } \\
     \nabla^2 f(\bm{x}) &= \frac{1}{S}\text{diag}(\bm{e}) - \frac{1}{S^2}\bm{e}\bm{e}^T
 \end{align*}
