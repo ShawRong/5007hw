@@ -338,7 +338,8 @@ It's easy to find the Hessian matrix \(\bm{H} = \frac{1}{\alpha_k} \bm{W}\)
 
 \begin{align*}
     \nabla \Phi(\bm{d}) &= \nabla f(\bm{x}^{(k)}) + \frac{1}{\alpha_k} \bm{W}\bm{d} = 0\\
-    \bm{d} &= -\alpha_k \bm{W}^{-1} \nabla f(\bm{x}^{(k)}) 
+    \bm{d} &= -\alpha_k \bm{W}^{-1} \nabla f(\bm{x}^{(k)})  \\
+    \bm{x}^{(k + 1)} &= \bm{x}^{(k)} - \alpha_k \bm{W}^{-1} \nabla f(\bm{x}^{(k)})
 \end{align*}
 Therefore, \(\bm{x}^{(k + 1)}\) is equivalently the unique minimizer of this unconstrained quadratic problem.
 
