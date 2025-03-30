@@ -244,16 +244,26 @@ We know
 \end{align*}
 According to Cauchy-Schwarz inequality, we know:
 \begin{align*}
-    \nabla f(\bm{x})^T \|\bm{x} - \bm{x}^*\| &\leq \|\nabla f(\bm{x})\| \|\bm{x} - \bm{x}^*\|  \\
+    \nabla f(\bm{x})^T (\bm{x} - \bm{x}^*) &\leq \|\nabla f(\bm{x})\| \|\bm{x} - \bm{x}^*\|  \\
     f(\bm{x}) - f(\bm{x}^*) &\leq  \|\nabla f(\bm{x})\| \|\bm{x} - \bm{x}^*\| - \frac{1}{2} m \|\bm{x} - \bm{x}^*\|^2  \\
 \end{align*}
-We know if \(\|\bm{x} - \bm{x}^*\| = \frac{1}{m} \|\nabla f(\bm{x})\|\), we get the maximum.
+We know if \(\|\bm{x} - \bm{x}^*\| = \frac{1}{m} \|\nabla f(\bm{x})\|\)(considering the \(g(t) = \|\nabla f(\bm{x})\| t - \frac{1}{2} m t^2\)), we get the maximum.
 \begin{align*}
     f(\bm{x}) - f(\bm{x}^*) &\leq  \|\nabla f(\bm{x})\| \frac{1}{m} \|\nabla f(\bm{x})\| - \frac{1}{2} m (\frac{1}{m} \|\nabla f(\bm{x})\|)^2 = \frac{1}{2m} \|\nabla f(\bm{x})\|^2 \\
 \end{align*}
 Therefore, \( f(\bm{x}) - f(\bm{x}^*) \leq \frac{1}{2m} \|\nabla f(\bm{x})\|^2 \)
 
 And we know:
+\begin{align*}
+    f(\bm{y}) \leq f(\bm{x}) + \nabla f(\bm{x})^T (\bm{y} - \bm{x}) + \frac{M}{2} \|\bm{y} - \bm{x}\|^2 \\
+\end{align*}
+Since 
+\begin{align*}
+    &f(\bm{y}) = f(\bm{x}) + \nabla f(\bm{x})^T (\bm{y} - \bm{x}) + \frac{1}{2} (\bm{y} - \bm{x})^T \nabla^2 f(\bm{z}) (\bm{y} - \bm{x}) \\
+    &(\bm{y} - \bm{x})^T \nabla^2 f(\bm{z}) (\bm{y} - \bm{x}) \leq M \|\bm{y} - \bm{x}\|^2 \\
+    &f(\bm{y}) \leq f(\bm{x}) + \nabla f(\bm{x})^T (\bm{y} - \bm{x}) + \frac{1}{2} M \|\bm{y} - \bm{x}\|^2  \\
+\end{align*}
+So
 \begin{align*}
     &f(\bm{y}) \leq f(\bm{x}) + \nabla f(\bm{x})^T (\bm{y} - \bm{x}) + \frac{M}{2} \|\bm{y} - \bm{x}\|^2 \\
     & \bm{y} =  \bm{x} - \frac{1}{M} \nabla f(\bm{x}) \\
