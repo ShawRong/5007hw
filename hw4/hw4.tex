@@ -28,6 +28,80 @@ where \(x = [x_1, x_2, \cdots, x_n]^T\). Recall that the proximity operator of a
 \end{align*}
 Derive a closed-form expression for \(\text{prox}_f(\bm{y})\).
 
+\section*{Answer}
+Obviously, we can get the \(\text{proj}_f(\bm{y})\) as.
+\begin{align*}
+    \text{proj}_f(\bm{y}) = \text{arg min}_{\bm{x} \in \R^d} \{ \sum_{i=1}^{d} \max(0, 1 - x_i) + \frac{1}{2} \sum_{i=1}^{d}(x_i - y_i)^2 \}
+\end{align*}
+We can denote \(\text{proj}_f(\bm{y})_i\) as follow:
+\begin{align*}
+    \text{proj}_f(\bm{y})_i = \text{arg min}_{x \in \R} \{ \max(0, 1 - x) + \frac{1}{2} (x - y_i)^2 \}
+\end{align*}
+s.t.
+\begin{align*}
+    \text{proj}_f(\bm{y}) = \sum_{i=1}^{d} \text{proj}_f(\bm{y})_i
+\end{align*}
+
+
+\noindent
+Let \(\phi(x) =  \max(0, 1 - x) + \frac{1}{2} (x - y_i)^2  \) \\
+if \(x \geq 1\)
+\begin{align*}
+    \phi(x) = \{\frac{1}{2} (x - y_i)^2 \} \\
+\end{align*}
+To minimize this, we need:
+\begin{align*}
+    &x = y_i &\text{if } y_i \geq 1 \\
+    &x = 1        &\text{if } y_i < 1 \\
+\end{align*}
+Therefore, 
+\begin{align*}
+    &\text{proj}_f(\bm{y})_i = y_i &\text{if } y_i \geq 1 \\
+    &\text{proj}_f(\bm{y})_i = 1 &\text{if } y_i < 1 \\
+\end{align*}
+
+
+if \(x \leq 1\)
+\begin{align*}
+    \phi(x) = \{ 1 - x + \frac{1}{2} (x - y_i)^2 \} \\
+\end{align*}
+
+To minimize this, we need:
+\begin{align*}
+    &x = y_i + 1 &\text{if }y_i < 0 \\
+    &x = 1 &\text{if }y_i \geq 0
+\end{align*}
+Therefore, 
+\begin{align*}
+    &\text{proj}_f(\bm{y})_i = y_i + 1 &\text{if } y_i < 0 \\
+    &\text{proj}_f(\bm{y})_i = 1 &\text{if } y_i \geq 0 \\
+\end{align*}
+
+\noindent
+Combining these two, we get:
+\begin{align*}
+    &\text{proj}_f(\bm{y})_i = \min\{y_i + 1, 1\} = y_i + 1 &\text{if } y_i < 0 \\
+    &\text{proj}_f(\bm{y})_i = \min\{1, 1\} = 1 &\text{if } 0 \leq y_i < 1 \\ 
+    &\text{proj}_f(\bm{y})_i = y_i &\text{if } y_i \geq 1 \\
+\end{align*}
+
+\noindent
+So, in conclusion, 
+\begin{align*}
+    \text{proj}_f(\bm{y}) = [\text{proj}_f(\bm{y})_i]_{i=1}^{d}
+\end{align*}
+where,
+\begin{align*}
+    &\text{proj}_f(\bm{y})_i = \min\{y_i + 1, 1\} = y_i + 1 &\text{if } y_i < 0 \\
+    &\text{proj}_f(\bm{y})_i = \min\{1, 1\} = 1 &\text{if } 0 \leq y_i < 1 \\ 
+    &\text{proj}_f(\bm{y})_i = y_i &\text{if } y_i \geq 1 \\
+\end{align*}
+
+
+
+
+
+
 \section*{Question2}
 In this problem, we study two properties of the 2-norm function \(g(\bm{x}) = \|\bm{x}\|_2\) defined on \(\R^n\). \\
 Provide detailed derivations to show that: \\
