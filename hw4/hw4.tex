@@ -60,6 +60,25 @@ where \(\bm{A} \in \R^{m \times n}, \bm{b} \in \R^m\), and \(\lambda_1, \lambda_
 
 
 \section*{Question 4}
+Let \(g: \R^n \to \R\) be a convex function. Prove the following properties: \\
+(a) For any \(\bm{x}, \bm{y} \in \R^n\) and for any \(\bm{u} \in \partial g(\bm{x})\) and \(\bm{v} \in \partial g(\bm{y})\), show that
+\begin{align*}
+    \langle \bm{u} - \bm{v}, \bm{x} - \bm{y}\rangle \geq 0.
+\end{align*}
+\textit{Hint: Use the definition of the subdifferential}
+
+\noindent
+(b) Prove that the proximity operator of \(g\) is nonexpansive; that is, for all \(\bm{x}, \bm{y} \in \R^n\),
+\begin{align*}
+    \|\text{prox}_g (\bm{x}) - \text{prox}_g(\bm{y})\|_2 \leq \|\bm{x} - \bm{y}\|_2
+\end{align*}
+\textit{Hint: Apply the result from part (a)}
+
+\noindent
+(c) Show that a point \(\bm{x}^*\) minimizes \(g\) if and only if
+\begin{align*}
+    \bm{x}^* = \text{prox}_g(\bm{x}^*)
+\end{align*}
 
 
 
