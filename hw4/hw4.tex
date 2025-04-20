@@ -164,11 +164,10 @@ By definition, we know:
     \text{prox}_{\alpha \|\cdot\|_2} (\bm{y}) = \text{arg} \min_{x \in \R^n} \left\{ \alpha\|\bm{x}\|_2 + \frac{1}{2} \|\bm{x} - \bm{y}\|_2^2\right\}
 \end{align*}
 We denote \(\phi(\bm{x}) = \alpha\|\bm{x}\|_2 + \frac{1}{2} \|\bm{x} - \bm{y}\|_2^2\), considering the subdifferential of \(\|\bm{x}\|_2\), we have
+
 \begin{align*}
-    \partial \phi(\bm{x}) = \begin{cases}
-        \alpha \frac{\bm{x}}{\|\bm{x}\|_2} + \bm{x} - \bm{y} &\text{if } \bm{x} \ne \bm{0}, \\
-        \alpha\bm{u} - \bm{y}   &\text{if } \bm{x} = \bm{0}, \text{ where }\|\bm{u}\|_2 \leq 1
-    \end{cases}
+    \partial \phi(\bm{x}) = 
+        \alpha \frac{\bm{x}}{\|\bm{x}\|_2} + \bm{x} - \bm{y} &\text{  if } \bm{x} \ne \bm{0}, \\
 \end{align*}
 
 If \(\bm{x} \ne \bm{0}\), we get the minimizer \(\bm{x}^*\)
