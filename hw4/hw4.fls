@@ -107,6 +107,7 @@ OUTPUT hw4.pdf
 INPUT c:/texlive/2024/texmf-var/fonts/map/pdftex/updmap/pdftex.map
 INPUT c:/texlive/2024/texmf-dist/fonts/tfm/public/cm/cmti10.tfm
 INPUT hw4.aux
+INPUT c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmbsy7.pfb
 INPUT c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
 INPUT c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb
 INPUT c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb

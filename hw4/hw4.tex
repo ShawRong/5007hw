@@ -285,6 +285,83 @@ Let \(g: \R^n \to \R\) be a convex function. Prove the following properties: \\
     \bm{x}^* = \text{prox}_g(\bm{x}^*)
 \end{align*}
 
+\section*{Answer}
+\subsection*{(a)}
+We know \(\forall \bm{z} \in \R^n\), we get
+\begin{align*}
+    &g(\bm{z}) \geq g(\bm{x}) + \langle \bm{u}, \bm{z} - \bm{x}\rangle \\
+    &g(\bm{z}) \geq g(\bm{y}) + \langle \bm{v}, \bm{z} - \bm{y}\rangle \\
+\end{align*}
+So we choose \(\bm{z} = \bm{y}, \bm{z} = \bm{x}\) separately.
+\begin{align*}
+    &g(\bm{y}) \geq g(\bm{x}) + \langle \bm{u}, \bm{y} - \bm{x}\rangle \\
+    &g(\bm{x}) \geq g(\bm{y}) + \langle \bm{v}, \bm{x} - \bm{y}\rangle \\
+    &g(\bm{y}) + g(\bm{x}) \geq g(\bm{x}) + g(\bm{y}) + \langle \bm{u}, \bm{y} - \bm{x}\rangle + \langle \bm{v}, \bm{x} - \bm{y}\rangle \\
+    &0 \geq \langle \bm{u} - \bm{v}, \bm{y} - \bm{x}\rangle \\
+    &\langle \bm{u} - \bm{v}, \bm{x} - \bm{y}\rangle \geq 0
+\end{align*}
+
+\subsection*{(b)}
+For \(\text{prox}_g(\bm{y}) = \text{arg min}_{\bm{x} \in \R^n} \phi (\bm{x})\). Let's denote \(\phi (\bm{x}) = g(\bm{x}) + \frac{1}{2}\|\bm{x} - \bm{y}\|_2^2\), \(\partial \phi (\bm{x}) = \partial g(\bm{x}) + \bm{x} - \bm{y}\) \\
+The minimizer \(\bm{x}^*\) of \(\phi(\bm{x})\) satisfies \(\bm{0} \in \partial g(\bm{x}^*) + \bm{x}^* - \bm{y}\), and \(\text{porx}_g(\bm{y}) = \bm{x}^*\) \\
+Suppose \(\text{prox}_g(\bm{x}) = \bm{p}, \text{prox}_g(\bm{x}) = \bm{q}\)
+\begin{align*}
+    &\bm{0} \in \partial g(\bm{p}) + (\bm{p} - \bm{x}) \\
+    &\bm{x} - \bm{p} \in \partial g(\bm{p}) \\
+    &\bm{0} \in \partial g(\bm{q}) + (\bm{q} - \bm{y}) \\
+    &\bm{y} - \bm{q} \in \partial g(\bm{q}) \\
+\end{align*}
+by (a)
+\begin{align*}
+    &\langle (\bm{x} - \bm{p}) - (\bm{y} - \bm{q}), \bm{p} - \bm{q} \rangle \geq 0 \\
+    &\langle (\bm{x} - \bm{y}) - (\bm{p} - \bm{q}), \bm{p} - \bm{q} \rangle \geq 0 \\
+    &\langle \bm{x} - \bm{y}, \bm{p} - \bm{q} \rangle \geq \| \bm{p} - \bm{q} \|_2^2\\
+\end{align*}
+By cs inequality, we know:
+\begin{align*}
+    \langle \bm{x} - \bm{y}, \bm{p} - \bm{q} \rangle \leq \|\bm{x} - \bm{y}\|_2\|\bm{p} - \bm{q}\|_2
+\end{align*}
+Thus,
+\begin{align*}
+    & \|\bm{x} - \bm{y}\|_2 \geq \| \bm{p} - \bm{q} \|_2 \\
+    &\|\text{prox}_g (\bm{x}) - \text{prox}_g(\bm{y})\|_2 \leq \|\bm{x} - \bm{y}\|_2
+\end{align*}
+
+\subsection*{(c)}
+if \(\bm{x}^*\) is a minimizer of g, we get
+\begin{align*}
+    \bm{0} \in \partial g(\bm{x}^*)
+\end{align*}
+We know
+\begin{align*}
+    \bm{0} \in \partial g(\bm{z}) + \bm{z} - \bm{x^*} \implies \text{prox}_g(\bm{x}^*) = \bm{z}
+\end{align*}
+And we know:
+\begin{align*}
+    &\bm{0} \in \partial g(\bm{x}^*) \\
+    &\bm{0} \in \partial g(\bm{x}^*) + \bm{x}^* - \bm{x}^*
+\end{align*}
+So we can conclude
+\begin{align*}
+    \text{prox}_g(\bm{x}^*) = \bm{\bm{x}^*}
+\end{align*}
+
+\noindent
+if \(\bm{x}^* = \text{prox}_g(\bm{x}^*)\)
+\begin{align*}
+    &\bm{0} \in \partial g(\bm{\bm{x}^*}) + \bm{\bm{x}^*} - \bm{x^*} \\
+    &\bm{0} \in \partial g(\bm{\bm{x}^*}) \\
+\end{align*}
+We know
+\begin{align*}
+    \text{g is a convex function and } \partial g(\bm{x}) = 0 \implies \bm{x} \text{ is a minimizer of g.}
+\end{align*}
+
+So in conclusion, 
+\begin{align*}
+     \bm{x}^* \text{ minimizes } g \iff \bm{x}^* = \text{prox}_g(\bm{x}^*)
+\end{align*}
+
 
 
 
