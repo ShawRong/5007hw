@@ -158,6 +158,54 @@ In conclusion,
 
 
 \subsection*{(b)}
+By definition, we know:
+\begin{align*}
+    \text{prox}_{\alpha \|\cdot\|_2} (\bm{y}) = \text{arg} \min_{x \in \R^n} \left\{ \alpha\|\bm{x}\|_2 + \frac{1}{2} \|\bm{x} - \bm{y}\|_2^2\right\}
+\end{align*}
+We denote \(\phi(\bm{x}) = \alpha\|\bm{x}\|_2 + \frac{1}{2} \|\bm{x} - \bm{y}\|_2^2\), considering the subdifferential of \(\|\bm{x}\|_2\), we have
+\begin{align*}
+    \partial \phi(\bm{x}) = \begin{cases}
+        \alpha \frac{\bm{x}}{\|\bm{x}\|_2} + \bm{x} - \bm{y} &\text{if } \bm{x} \ne \bm{0}, \\
+        \alpha\bm{u} - \bm{y}   &\text{if } \bm{x} = \bm{0}, \text{ where }\|\bm{u}\|_2 \leq 1
+    \end{cases}
+\end{align*}
+
+If \(\bm{x} \ne \bm{0}\), we get the minimizer \(\bm{x}^*\)
+\begin{align*}
+    &\alpha \frac{\bm{x}^*}{\|\bm{x}^*\|_2} + \bm{x}^* - \bm{y} = \bm{0} \\
+    &\bm{y} = \alpha \frac{\bm{x}^*}{\|\bm{x}^*\|_2} + \bm{x}^* \\
+\end{align*}
+Obviously, \(t\bm{y} = \bm{x}^*, t \ne 0\), therefore,
+\begin{align*}
+    &\bm{y} = \alpha \frac{\bm{y}}{\|\bm{y}\|_2} + t\bm{y} \\
+    &t = 1 - \frac{\alpha}{\|\bm{y}\|_2} \\
+    &\bm{x}^* = (1 - \frac{\alpha}{\|\bm{y}\|_2})\bm{y} , \text{ where  } \alpha \ne \|\bm{y}\|_2\\
+\end{align*}
+So in conclusion, 
+\begin{align*}
+    &\min \phi(\bm{x}) = \alpha\|\bm{y}\|_2 - \frac{\alpha^2}{2} \text{  if  } \bm{x} \ne \bm{0} \\
+    &\bm{x}^* = (1 - \frac{\alpha}{\|\bm{y}\|_2})\bm{y}
+\end{align*}
+If \(\bm{x} = \bm{0}\), we get
+\begin{align*}
+    &\phi(\bm{x}) = \frac{\|\bm{y}\|_2^2}{2} \\
+    &\min \phi(\bm{x}) = \frac{\|\bm{y}\|_2^2}{2} \\
+\end{align*}
+
+By solving the inequality, we know:
+\begin{align*}
+    &\frac{\|\bm{y}\|_2^2}{2} <  \alpha\|\bm{y}\|_2 - \frac{\alpha^2}{2} \\
+    &\|\bm{y}\|_2^2 - 2\alpha\|\bm{y}\|_2 + \alpha^2 < 0
+\end{align*}
+It holds when \(\alpha > \|\bm{y}\|_2^2\).  \\
+Combining these two condition, we know:
+\begin{align*}
+    \text{prox}_{\alpha \|\cdot\|_2}(\bm{y}) = \begin{cases}
+        \left(1 - \frac{\alpha}{\|\bm{y}\|_2} \right)\bm{y} &\text{if }\|\bm{y}\|_2 \geq \alpha, \\
+        \bm{0} &\text{if } \|\bm{y}\|_2 \leq \alpha.
+    \end{cases}
+\end{align*}
+
 
 
 
