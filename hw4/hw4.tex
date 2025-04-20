@@ -29,17 +29,17 @@ where \(x = [x_1, x_2, \cdots, x_n]^T\). Recall that the proximity operator of a
 Derive a closed-form expression for \(\text{prox}_f(\bm{y})\).
 
 \section*{Answer}
-Obviously, we can get the \(\text{proj}_f(\bm{y})\) as.
+Obviously, we can get the \(\text{prox}_f(\bm{y})\) as.
 \begin{align*}
-    \text{proj}_f(\bm{y}) = \text{arg min}_{\bm{x} \in \R^d} \{ \sum_{i=1}^{d} \max(0, 1 - x_i) + \frac{1}{2} \sum_{i=1}^{d}(x_i - y_i)^2 \}
+    \text{prox}_f(\bm{y}) = \text{arg min}_{\bm{x} \in \R^d} \{ \sum_{i=1}^{d} \max(0, 1 - x_i) + \frac{1}{2} \sum_{i=1}^{d}(x_i - y_i)^2 \}
 \end{align*}
-We can denote \(\text{proj}_f(\bm{y})_i\) as follow:
+We can denote \(\text{prox}_f(\bm{y})_i\) as follow:
 \begin{align*}
-    \text{proj}_f(\bm{y})_i = \text{arg min}_{x \in \R} \{ \max(0, 1 - x) + \frac{1}{2} (x - y_i)^2 \}
+    \text{prox}_f(\bm{y})_i = \text{arg min}_{x \in \R} \{ \max(0, 1 - x) + \frac{1}{2} (x - y_i)^2 \}
 \end{align*}
 s.t.
 \begin{align*}
-    \text{proj}_f(\bm{y}) = \sum_{i=1}^{d} \text{proj}_f(\bm{y})_i
+    \text{prox}_f(\bm{y}) = \sum_{i=1}^{d} \text{prox}_f(\bm{y})_i
 \end{align*}
 
 
@@ -56,8 +56,8 @@ To minimize this, we need:
 \end{align*}
 Therefore, 
 \begin{align*}
-    &\text{proj}_f(\bm{y})_i = y_i &\text{if } y_i \geq 1 \\
-    &\text{proj}_f(\bm{y})_i = 1 &\text{if } y_i < 1 \\
+    &\text{prox}_f(\bm{y})_i = y_i &\text{if } y_i \geq 1 \\
+    &\text{prox}_f(\bm{y})_i = 1 &\text{if } y_i < 1 \\
 \end{align*}
 
 
@@ -73,28 +73,28 @@ To minimize this, we need:
 \end{align*}
 Therefore, 
 \begin{align*}
-    &\text{proj}_f(\bm{y})_i = y_i + 1 &\text{if } y_i < 0 \\
-    &\text{proj}_f(\bm{y})_i = 1 &\text{if } y_i \geq 0 \\
+    &\text{prox}_f(\bm{y})_i = y_i + 1 &\text{if } y_i < 0 \\
+    &\text{prox}_f(\bm{y})_i = 1 &\text{if } y_i \geq 0 \\
 \end{align*}
 
 \noindent
 Combining these two, we get:
 \begin{align*}
-    &\text{proj}_f(\bm{y})_i = \min\{y_i + 1, 1\} = y_i + 1 &\text{if } y_i < 0 \\
-    &\text{proj}_f(\bm{y})_i = \min\{1, 1\} = 1 &\text{if } 0 \leq y_i < 1 \\ 
-    &\text{proj}_f(\bm{y})_i = y_i &\text{if } y_i \geq 1 \\
+    &\text{prox}_f(\bm{y})_i = \min\{y_i + 1, 1\} = y_i + 1 &\text{if } y_i < 0 \\
+    &\text{prox}_f(\bm{y})_i = \min\{1, 1\} = 1 &\text{if } 0 \leq y_i < 1 \\ 
+    &\text{prox}_f(\bm{y})_i = y_i &\text{if } y_i \geq 1 \\
 \end{align*}
 
 \noindent
 So, in conclusion, 
 \begin{align*}
-    \text{proj}_f(\bm{y}) = [\text{proj}_f(\bm{y})_i]_{i=1}^{d}
+    \text{prox}_f(\bm{y}) = [\text{prox}_f(\bm{y})_i]_{i=1}^{d}
 \end{align*}
 where,
 \begin{align*}
-    &\text{proj}_f(\bm{y})_i = \min\{y_i + 1, 1\} = y_i + 1 &\text{if } y_i < 0 \\
-    &\text{proj}_f(\bm{y})_i = \min\{1, 1\} = 1 &\text{if } 0 \leq y_i < 1 \\ 
-    &\text{proj}_f(\bm{y})_i = y_i &\text{if } y_i \geq 1 \\
+    &\text{prox}_f(\bm{y})_i = \min\{y_i + 1, 1\} = y_i + 1 &\text{if } y_i < 0 \\
+    &\text{prox}_f(\bm{y})_i = \min\{1, 1\} = 1 &\text{if } 0 \leq y_i < 1 \\ 
+    &\text{prox}_f(\bm{y})_i = y_i &\text{if } y_i \geq 1 \\
 \end{align*}
 
 
@@ -122,6 +122,48 @@ Provide detailed derivations to show that: \\
         \bm{0} &\text{if } \|\bm{y}\|_2 \leq \alpha.
     \end{cases}
 \end{align*}
+
+\section*{Answer}
+\subsection*{(a)}
+If \(\bm{x} \ne \bm{0}\), we have:
+\begin{align*}
+    \nabla \|\bm{x}\|_2 = \frac{\bm{x}}{\|\bm{x}\|_2}
+\end{align*}
+Therefore,
+\begin{align*}
+    \partial \|\bm{x}\|_2 = \left\{ \frac{\bm{x}}{\|\bm{x}\|_2} \right\}, \text{if } \bm{x} \ne \bm{0}.
+\end{align*}
+
+If \(\bm{x} = \bm{0}\), we have:
+\begin{align*}
+    \|\bm{y}\|_2 &\geq \|\bm{0}\|_2 + \bm{v}^T (\bm{y} - \bm{0}) \\
+    \|\bm{y}\|_2 &\geq \bm{v}^T \bm{y}
+\end{align*}
+According to cs inequality, we know:
+\begin{align*}
+    &\bm{v}^T \bm{y} \leq \|\bm{v}\|_2\|\bm{y}\|_2 \\
+    &\bm{v}^T \bm{y} \leq \|\bm{y}\|_2, \text{  if  } \|\bm{v}\|_2 \leq 1
+\end{align*}
+Therefore, we get:
+\begin{align*}
+    \partial \|\bm{x}\|_2 = \left\{ \bm{u} \in \R^n | \|\bm{u}\|_2 \leq 1\right\} &\text{  if  } \bm{x} = \bm{0}.
+\end{align*}
+In conclusion,
+\begin{align*}
+    \partial \|\bm{x}\|_2 = \begin{cases}
+        \left\{ \frac{\bm{x}}{\|\bm{x}\|_2}\right\} &\text{if } \bm{x} \ne \bm{0}, \\
+        \left\{ \bm{u} \in \R^n | \|\bm{u}\|_2 \leq 1\right\} &\text{if } \bm{x} = \bm{0}.
+    \end{cases}
+\end{align*}
+
+
+\subsection*{(b)}
+
+
+
+
+
+
 
 \section*{Question 3}
 In this problem, we consider the elastic net regression model, which is widely used in statistics for regularized linear regression. The optimization problem is given by
