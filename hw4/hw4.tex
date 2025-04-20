@@ -92,9 +92,10 @@ So, in conclusion,
 \end{align*}
 where,
 \begin{align*}
-    &\text{prox}_f(\bm{y})_i = \min\{y_i + 1, 1\} = y_i + 1 &\text{if } y_i < 0 \\
-    &\text{prox}_f(\bm{y})_i = \min\{1, 1\} = 1 &\text{if } 0 \leq y_i < 1 \\ 
-    &\text{prox}_f(\bm{y})_i = y_i &\text{if } y_i \geq 1 \\
+    &\text{prox}_f(\bm{y})_i = \begin{cases} y_i + 1 &\text{if } y_i < 0 \\
+    1 &\text{if } 0 \leq y_i < 1 \\ 
+    y_i &\text{if } y_i \geq 1 \\
+    \end{cases}
 \end{align*}
 
 
