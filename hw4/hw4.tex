@@ -229,7 +229,7 @@ where \(\bm{A} \in \R^{m \times n}, \bm{b} \in \R^m\), and \(\lambda_1, \lambda_
 \begin{align*}
     \text{prox}_{\beta_1\|\cdot\|_1 + \frac{\beta_2}{2}\|\cdot\|_2^2}(\bm{y}) = \text{arg min}_{\bm{x} \in \R^n} \left( \frac{1}{2} \|\bm{x} - \bm{y}\|_2^2 + \beta_1\|\bm{x}\|_1 + \frac{\beta_2}{2} \|\bm{x}\|_2^2\right)
 \end{align*}
-We can reconstruct the problem as minimize the following problem:
+We can reconstruct the problem as minimizing the following problem:
 \begin{align*}
     \phi(x) = \beta_1 |x| + \frac{\beta_2}{2} x^2 + \frac{1}{2} (x - y_i)^2 \\
 \end{align*}
@@ -238,6 +238,30 @@ And we know, we need
     &0 \in \partial \beta_1 |x| + \beta_2 x + x - y_i \\
     &y_i \in \partial \beta_1 |x| + (1 + \beta_2) x \\
 \end{align*}
+if \(x > 0\),
+\begin{align*}
+    &y_i \in \beta_1 + (1 + \beta_2) x
+\end{align*}
+\noindent
+Therefore, \(y_i > \beta_1\), \(x = \frac{y_i - \beta_1}{1 + \beta_2}\)
+
+\noindent
+if \(x < 0\)
+\begin{align*}
+    &y_i \in -\beta_1 + (1 + \beta_2) x
+\end{align*}
+Therefore, \(y_i < -\beta_1\), \(x = \frac{y_i + \beta_1}{1 + \beta_2}\)
+
+\noindent
+if \(x = 0\)
+\begin{align*}
+    y_i \in \beta_1 \partial |x|
+\end{align*}
+Therefore, \(\beta_2 \leq y_i \leq \beta_1\)
+
+
+
+\noindent
 Therefore, we get:
 \begin{align*}
     x = \begin{cases}
