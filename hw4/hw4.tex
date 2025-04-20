@@ -223,6 +223,47 @@ where \(\bm{A} \in \R^{m \times n}, \bm{b} \in \R^m\), and \(\lambda_1, \lambda_
 (b) We apply the forward-backward splitting (i.e. proximal gradient) algorithm. In particular, we apply a forward step for \(\frac{1}{2} \|\bm{A}\bm{x} - \bm{b}\|_2^2\) and a backward step for \(\lambda_1\|\bm{x}\|_1 + \frac{\lambda_2}{2}\|\bm{x}\|_2^2\). Write down the iterative update rule for the resulting algorithm.
 
 
+\section*{Answer}
+\subsection*{(a)}
+\begin{align*}
+    \text{prox}_{\beta_1\|\cdot\|_1 + \frac{\beta_2}{2}\|\cdot\|_2^2}(\bm{y}) = \text{arg min}_{\bm{x} \in \R^n} \left( \frac{1}{2} \|\bm{x} - \bm{y}\|_2^2 + \beta_1\|\bm{x}\|_1 + \frac{\beta_2}{2} \|\bm{x}\|_2^2\right)
+\end{align*}
+We can reconstruct the problem as minimize the following problem:
+\begin{align*}
+    \phi(x) = \beta_1 |x| + \frac{\beta_2}{2} x^2 + \frac{1}{2} (x - y_i)^2 \\
+\end{align*}
+And we know, we need
+\begin{align*}
+    &0 \in \partial \beta_1 |x| + \beta_2 x + x - y_i \\
+    &y_i \in \partial \beta_1 |x| + (1 + \beta_2) x \\
+\end{align*}
+Therefore, we get:
+\begin{align*}
+    x = \begin{cases}
+        \frac{y_i - \beta_1}{1 + \beta_2} &\text{if } y_i > \beta_1, \\
+        0 &\text{if } |y_i| \leq \beta_1, \\
+        \frac{y_i + \beta_1}{1 + \beta_2} &\text{if } y_i < -\beta_1, \\
+    \end{cases}
+\end{align*}
+Therefore:
+\begin{align*}
+    &\text{prox}_{\beta_1\|\cdot\|_1 + \frac{\beta_2}{2}\|\cdot\|_2^2}(\bm{y})_i = \begin{cases}
+        \frac{y_i - \beta_1}{1 + \beta_2} &\text{if } y_i > \beta_1, \\
+        0 &\text{if } |y_i| \leq \beta_1, \\
+        \frac{y_i + \beta_1}{1 + \beta_2} &\text{if } y_i < -\beta_1, \\
+    \end{cases}\\
+    &\text{prox}_{\beta_1\|\cdot\|_1 + \frac{\beta_2}{2}\|\cdot\|_2^2}(\bm{y}) = [\text{prox}_{\beta_1\|\cdot\|_1 + \frac{\beta_2}{2}\|\cdot\|_2^2}(\bm{y})_i]_{i = 1}^{n}
+\end{align*}
+
+
+\subsection*{(b)}
+\begin{align*}
+    &\bm{x}^{(k+1)} = T_{\alpha_k \lambda_1 \lambda_2} \left(x^{(k)} - \alpha_k \bm{A}^T(\bm{A}\bm{x}^{(k)} - \bm{b}) \right) \\
+    &T_{\alpha_k \lambda_1 \lambda_2}(\bm{x}) = \text{prox}_{\alpha_k\lambda_1\|\cdot\|_1 + \frac{\alpha_k\lambda_2}{2}\|\cdot\|_2^2}(\bm{x})
+\end{align*}
+
+
+
 \section*{Question 4}
 Let \(g: \R^n \to \R\) be a convex function. Prove the following properties: \\
 (a) For any \(\bm{x}, \bm{y} \in \R^n\) and for any \(\bm{u} \in \partial g(\bm{x})\) and \(\bm{v} \in \partial g(\bm{y})\), show that
