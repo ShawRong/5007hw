@@ -18,48 +18,16 @@
 \maketitle
 
 \section*{Question1}
-Consider the function \(f: \R^d \to \R\) defined by 
-\begin{align*}
-    f(\bm{x}) = \sum_{i = 1}^{d}\max(0,1 - x_i),
-\end{align*}
-where \(x = [x_1, x_2, \cdots, x_n]^T\). Recall that the proximity operator of a function \(g: \R^d \to \R\) is defined as 
-\begin{align*}
-    \text{prox}_g = \text{arg} \min_{x \in \R^d} \left\{ g(\bm{x}) + \frac{1}{2} \|\bm{x} - \bm{y}\|_2^2\right\}, \bm{y} \in \R^d.
-\end{align*}
-Derive a closed-form expression for \(\text{prox}_f(\bm{y})\).
+Find explicit formulas for the projection of \(\bm{y} \in \R^n\) onto the following non-empty, closed, and convex sets \(S \subset \R^n\), respectively.
+(a) The unite \(\infty\)-norm
+def main() {
 
-\section*{Question2}
-In this problem, we study two properties of the 2-norm function \(g(\bm{x}) = \|\bm{x}\|_2\) defined on \(\R^n\). \\
-Provide detailed derivations to show that: \\
-\noindent
-(a) The subdifferential of \(g\) is given by
-\begin{align*}
-    \partial \|\bm{x}\|_2 = \begin{cases}
-        \left\{ \frac{\bm{x}}{\|\bm{x}\|_2}\right\} &\text{if } \bm{x} \ne \bm{0}, \\
-        \left\{ \bm{u} \in \R^n | \|\bm{u}\|_2 \leq 1\right\} &\text{if } \bm{x} = \bm{0}.
-    \end{cases}
-\end{align*}
-
-\noindent
-(b) For any \(\alpha > 0\), the proximity operator of \(\alpha \|\cdot\|_2\) is
-\begin{align*}
-    \text{prox}_{\alpha \|\cdot\|_2}(\bm{y}) = \begin{cases}
-        \left(1 - \frac{\alpha}{\|\bm{y}\|_2} \right)\bm{y} &\text{if }\|\bm{y}\|_2 \geq \alpha, \\
-        \bm{0} &\text{if } \|\bm{y}\|_2 \leq \alpha.
-    \end{cases}
-\end{align*}
-
-\section*{Question 3}
-In this problem, we consider the elastic net regression model, which is widely used in statistics for regularized linear regression. The optimization problem is given by
-\begin{align*}
-    \min_{\bm{x}\in\R^n} \frac{1}{2} \|\bm{A}\bm{x} - \bm{b}\|_2^2 + \lambda_1\|\bm{x}\|_1 + \frac{\lambda_2}{2}\|\bm{x}\|_2^2,
-\end{align*}
-where \(\bm{A} \in \R^{m \times n}, \bm{b} \in \R^m\), and \(\lambda_1, \lambda_2 > 0\) are regularization parameters. Answer the following: \\
-(a) For any \(\beta_1, \beta_2 > 0\), find a closed-form expression for proximity operator \(\text{prox}_{\beta_1\|\cdot\|_1 + \frac{\beta_2}{2}\|\cdot\|_2^2}(\bm{y})\). \\
-(b) We apply the forward-backward splitting (i.e. proximal gradient) algorithm. In particular, we apply a forward step for \(\frac{1}{2} \|\bm{A}\bm{x} - \bm{b}\|_2^2\) and a backward step for \(\lambda_1\|\bm{x}\|_1 + \frac{\lambda_2}{2}\|\bm{x}\|_2^2\). Write down the iterative update rule for the resulting algorithm.
+}
+main()
 
 
-\section*{Question 4}
+
+
 
 
 
