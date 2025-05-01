@@ -1,38 +1,60 @@
-\documentclass{article}
+\documentclass[12pt]{article}
+\usepackage[english]{babel}
 \usepackage{amsmath}
 \usepackage{amssymb}
-\usepackage{geometry}
-\usepackage{bm} 
-\usepackage{algorithm}
-\usepackage{algorithmicx}
-\usepackage{algpseudocode}
-\newcommand{\R}{\mathbb{R}}
-\geometry{a4paper, margin=1in}
+\usepackage[margin=2.5cm]{geometry}
 
-\title{MSBD 5007 HW4}
-\author{RONG Shuo}
-\date{\today}
+\title{MSBD5007 Optimization and Matrix Computation\\
+Homework 5}
+\date{Due date: 4 May, Sunday}
 
 \begin{document}
 
 \maketitle
 
-\section*{Question1}
-Find explicit formulas for the projection of \(\bm{y} \in \R^n\) onto the following non-empty, closed, and convex sets \(S \subset \R^n\), respectively.
-(a) The unite \(\infty\)-norm
-def main() {
+\begin{enumerate}
+\item Find explicit formulas for the projection of $y \in \mathbb{R}^n$ onto the following non-empty, closed, and convex sets $S \subset \mathbb{R}^n$, respectively.
+    \begin{enumerate}
+    \item The unit $\infty$-norm ball
+    \[S = \{x \in \mathbb{R}^n \mid \|x\|_\infty \leq 1\}.\]
+    \item The closed halfspace
+    \[S = \{x \in \mathbb{R}^n \mid a^T x \leq b\},\]
+    where $a \in \mathbb{R}^n$, $a \neq 0$, and $b \in \mathbb{R}$ are given.
+    \end{enumerate}
 
-}
-main()
+\item Consider the optimization problem in $x = (x_1, x_2, x_3) \in \mathbb{R}^3$:
+\[\begin{aligned}
+\min_{x\in\mathbb{R}^3} &\frac{1}{2}(x_1^2 + 4x_2^2 + 9x_3^2) - (4x_1 + 2x_2),\\
+\text{s.t.} \quad &x_1 + x_2 + x_3 = 3,\\
+&x_i \geq 0, \quad i = 1, 2, 3.
+\end{aligned}\]
+    \begin{enumerate}
+    \item Write down the KKT conditions (stationarity, feasibility, complementary slackness).
+    \item Solve the KKT system to find the optimal solution $x^*$, the Lagrange multiplier $\lambda^*$ for the equality constraint, and the multipliers $\mu^* = (\mu_1, \mu_2, \mu_3)$ for the inequality constraints.
+    \end{enumerate}
 
-
-
-
-
-
-
-
-
+\item We wish to compute the projection of $y \in \mathbb{R}^n$ onto the unit $\ell_1$ball, i.e. solve
+\[\begin{aligned}
+\min_{x\in\mathbb{R}^n} &\frac{1}{2}\|x - y\|_2^2\\
+\text{s.t.} \quad &\|x\|_1 \leq 1.
+\end{aligned}\]
+    \begin{enumerate}
+    \item Derive the Lagrange dual problem and show it can be written as
+    \[\max_{\lambda\geq 0} d(\lambda), \quad d(\lambda) = \sum_{i=1}^n h_\lambda(y_i) - \lambda,\]
+    where $h_\lambda : \mathbb{R} \to \mathbb{R}$ is the so-called Huber's function (which is a smooth function consisting of a quadratic and two linear pieces) defined by
+    \[h_\lambda(t) = \begin{cases}
+    \frac{1}{2}t^2, & |t| \leq \lambda,\\
+    \lambda |t| - \frac{1}{2}\lambda^2, & |t| \geq \lambda.
+    \end{cases}\]
+    \item Prove that strong duality holds.
+    \item Find the optimal dual multiplier $\lambda^*$.
+    \item Give an expression of the projection in terms of $\lambda^*$.
+    \end{enumerate}
+\item Let $S \subseteq \mathbb{R}^n$ be a nonempty, closed, convex set, and let $\|\cdot\|_2$ denote 2-norm. The projection of any point $y \in \mathbb{R}^n$ onto $S$ is defined by
+\[\mathcal{P}_S(y) = \arg\min_{x\in S} \|x-y\|_2.\]
+Prove that the projection $\mathcal{P}_S : \mathbb{R}^n \to S$ is nonexpansive: for all $x, y \in \mathbb{R}^n$,
+\[\|\mathcal{P}_S(x) - \mathcal{P}_S(y)\|_2 \leq \|x-y\|_2.\]
+\end{enumerate}
 
 
 \end{document}
