@@ -130,7 +130,70 @@ So we can get
 
 \subsection{(2)}
 \subsubsection{(a)}
+We can write the Lagrangian Function:
+\begin{align*}
+    \mathcal{L}(x, \lambda, \mu) = \frac{1}{2} (x_1^2 + 4x_2^2 + 9x_3^2) - (4x_1 + 2x_2) - \lambda(x_1 + x_2 + x_3 - 3) - \sum_{i=1}^{3} \mu_i x_i 
+\end{align*}
 
+\begin{align*}
+    \nabla_{x} \mathcal{L} = 0 \\
+    x_1 - 4 - \lambda - \mu_1 = 0 \\
+    4x_2 - 2 - \lambda - \mu_2 = 0 \\
+    9x_3 - \lambda - \mu_3 = 0 \\
+\end{align*}
+
+\begin{align*}
+    x_1 + x_2 + x_3 = 3 \\
+    x_i \geq 0
+\end{align*}
+
+\begin{align*}
+    \mu_i \geq 0 \\
+    \mu_i x_i = 0
+\end{align*}
+
+\subsubsection{(b)}
+We need to do analysis of the solution first.
+
+\begin{align*}
+    x_1 > 0, x_2 > 0, x_3 > 0 \quad \text{invalid} \\
+    x_1 = 0, x_2 > 0, x_3 > 0 \quad \text{invalid} \\
+    x_1 > 0, x_2 = 0, x_3 > 0 \quad \text{invalid} \\
+    x_1 > 0, x_2 > 0, x_3 = 0 \quad \text{valid} \\
+\end{align*}
+
+if \(x_3 = 0\), we know \(\mu_1 = 0, \mu_2 = 0\). Therefore, we get:
+\begin{align*}
+    x_1 = \lambda + 4 \\
+    x_2 = \frac {\lambda + 2} {4} \\
+    \mu_3 = -\lambda
+\end{align*}
+We know \(x_1 + x_2 = 3\).
+\begin{align*}
+    \lambda + 4 + \frac {\lambda + 2} {4} = 3 \\
+    \lambda = -\frac{6}{5}
+\end{align*}
+s.t.
+\begin{align*}
+    x_1 = \frac{14}{5} \\
+    x_2 = \frac{1}{5} \\
+    x_1 = 0 \\
+    \mu_3 = \frac{6}{5} \\
+\end{align*}
+
+Therefore, we can conclude:
+\begin{align*}
+    x_1 = \frac{14}{5} \\
+    x_2 = \frac{1}{5} \\
+    x_1 = 0 \\
+    \mu_1 = 0 \\
+    \mu_2 = 0 \\
+    \mu_3 = \frac{6}{5} \\
+    \lambda = -\frac{6}{5}
+\end{align*}
+
+\subsection{(3)}
+\subsubsection{(a)}
 
 
 \end{document}
