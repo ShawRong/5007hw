@@ -196,17 +196,17 @@ Therefore, we can conclude:
 \subsubsection{(a)}
 We know the Lagrange formula:
 \begin{align*}
-    \mathcal{L}(x, \lambda) = \frac{1}{2} \|x - y\|_2^2 + \lambda(\|x\|_1 - 1)
+    \mathcal{L}(\bm{x}, \lambda) = \frac{1}{2} \|\bm{x} - \bm{y}\|_2^2 + \lambda(\|\bm{x}\|_1 - 1)
 \end{align*}
 
 And the primal problem can be written as:
 \begin{align*}
-    \min_{x} \max_{\lambda \geq 0} \mathcal{L}(x, \lambda)
+    \min_{\bm{x}} \max_{\lambda \geq 0} \mathcal{L}(\bm{x}, \lambda)
 \end{align*}
 And the dual problem can be written as:
 \begin{align*}
-    \max_{\lambda \geq 0} \min_{x} \mathcal{L}(x, \lambda) \\
-    \max_{\lambda \geq 0} \min_{x} \frac{1}{2} \|x - y\|_2^2 + \lambda(\|x\|_1 - 1)
+    \max_{\lambda \geq 0} \min_{\bm{x}} \mathcal{L}(\bm{x}, \lambda) \\
+    \max_{\lambda \geq 0} \min_{\bm{x}} \frac{1}{2} \|\bm{x} - \bm{y}\|_2^2 + \lambda(\|\bm{x}\|_1 - 1)
 \end{align*}
 The problem is separable in x, so we can reformulate this problem as:
 \begin{align*}
@@ -304,30 +304,30 @@ where \(|y_i|\) is rearrange by descending order, and k is the number of \(|y_i|
 
 \subsection{(4)}
 \begin{align*}
-    \|\mathcal{P}_S(x) - \mathcal{P}_S(y) \|_2 &\leq \|x - y\|_2 \\
-    \|\text{arg} \min_{z \in S} \|z - x\|_2 - \text{arg} \min_{z \in S} \|z - x\|_2 \|_2 &\leq \|x - y\|_2
+    \|\mathcal{P}_S(\bm{x}) - \mathcal{P}_S(\bm{y}) \|_2 &\leq \|\bm{x} - \bm{y}\|_2 \\
+    \|\text{arg} \min_{\bm{z} \in S} \|\bm{z} - \bm{x}\|_2 - \text{arg} \min_{\bm{z} \in S} \|\bm{z} - \bm{x}\|_2 \|_2 &\leq \|\bm{x} - \bm{y}\|_2
 \end{align*}
 
 \begin{align*}
-    \langle y - \mathcal{P}_S y, z - \mathcal{P}_S y\rangle \leq 0, \forall z \in S \\
-    \langle x - \mathcal{P}_S x, z - \mathcal{P}_S x\rangle \leq 0, \forall z \in S
+    \langle \bm{y} - \mathcal{P}_S \bm{y}, \bm{z} - \mathcal{P}_S \bm{y}\rangle \leq 0, \forall \bm{z} \in S \\
+    \langle \bm{x} - \mathcal{P}_S \bm{x}, \bm{z} - \mathcal{P}_S \bm{x}\rangle \leq 0, \forall \bm{z} \in S
 \end{align*}
 Substitute \(z\) as \(\mathcal{P}_S x\) and \(\mathcal{P}_S y\) independently, and add the inequality up.
 \begin{align*}
-    \langle y - \mathcal{P}_S y, \mathcal{P}_S x - \mathcal{P}_S y\rangle \leq 0, \forall z \in S \\
-    \langle x - \mathcal{P}_S x, \mathcal{P}_S y - \mathcal{P}_S x\rangle \leq 0, \forall z \in S \\
-    \langle y - \mathcal{P}_S y, \mathcal{P}_S x - \mathcal{P}_S y\rangle + \langle x - \mathcal{P}_S x, \mathcal{P}_S y - \mathcal{P}_S x\rangle \leq 0 \\
-    \langle y - \mathcal{P}_S y - x + \mathcal{P}_S x, \mathcal{P}_S x - \mathcal{P}_S y\rangle  \leq 0 \\
-    \langle y - x - (\mathcal{P}_S y  - \mathcal{P}_S x), \mathcal{P}_S x - \mathcal{P}_S y\rangle  \leq 0 \\
-    \langle x - y, \mathcal{P}_S x - \mathcal{P}_S y\rangle  \geq \|\mathcal{P}_S x - \mathcal{P}_S y\|_2^2 \\
+    \langle \bm{y} - \mathcal{P}_S \bm{y}, \mathcal{P}_S \bm{x} - \mathcal{P}_S \bm{y}\rangle \leq 0, \forall \bm{z} \in S \\
+    \langle \bm{x} - \mathcal{P}_S \bm{x}, \mathcal{P}_S \bm{y} - \mathcal{P}_S \bm{x}\rangle \leq 0, \forall \bm{z} \in S \\
+    \langle \bm{y} - \mathcal{P}_S \bm{y}, \mathcal{P}_S \bm{x} - \mathcal{P}_S \bm{y}\rangle + \langle \bm{x} - \mathcal{P}_S \bm{x}, \mathcal{P}_S \bm{y} - \mathcal{P}_S \bm{x}\rangle \leq 0 \\
+    \langle \bm{y} - \mathcal{P}_S \bm{y} - \bm{x} + \mathcal{P}_S \bm{x}, \mathcal{P}_S \bm{x} - \mathcal{P}_S \bm{y}\rangle  \leq 0 \\
+    \langle \bm{y} - \bm{x} - (\mathcal{P}_S \bm{y}  - \mathcal{P}_S \bm{x}), \mathcal{P}_S \bm{x} - \mathcal{P}_S \bm{y}\rangle  \leq 0 \\
+    \langle \bm{x} - \bm{y}, \mathcal{P}_S \bm{x} - \mathcal{P}_S \bm{y}\rangle  \geq \|\mathcal{P}_S \bm{x} - \mathcal{P}_S \bm{y}\|_2^2 \\
 \end{align*}
 By CS-inequality,
 \begin{align*}
-    \langle x - y, \mathcal{P}_S x - \mathcal{P}_S y\rangle  \leq \|x - y\|_2 \|\mathcal{P}_S x - \mathcal{P}_S y\|_2 \\
+    \langle \bm{x} - \bm{y}, \mathcal{P}_S \bm{x} - \mathcal{P}_S \bm{y}\rangle  \leq \|\bm{x} - \bm{y}\|_2 \|\mathcal{P}_S \bm{x} - \mathcal{P}_S \bm{y}\|_2 \\
 \end{align*}
 \begin{align*}
-    \|x - y\|_2 \|\mathcal{P}_S x - \mathcal{P}_S y\|_2 \geq \|\mathcal{P}_S x - \mathcal{P}_S y\|_2^2 \\
-    \|x - y\|_2 \geq \|\mathcal{P}_S x - \mathcal{P}_S y\|_2 \\
-    \|x - y\|_2 \geq \|\mathcal{P}_S x - \mathcal{P}_S y\|_2 \\
+    \|\bm{x} - \bm{y}\|_2 \|\mathcal{P}_S \bm{x} - \mathcal{P}_S \bm{y}\|_2 \geq \|\mathcal{P}_S \bm{x} - \mathcal{P}_S \bm{y}\|_2^2 \\
+    \|\bm{x} - \bm{y}\|_2 \geq \|\mathcal{P}_S \bm{x} - \mathcal{P}_S \bm{y}\|_2 \\
+    \|\bm{x} - \bm{y}\|_2 \geq \|\mathcal{P}_S \bm{x} - \mathcal{P}_S \bm{y}\|_2 \\
 \end{align*}
 \end{document}
