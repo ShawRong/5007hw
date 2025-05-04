@@ -62,6 +62,75 @@ Prove that the projection $\mathcal{P}_S : \mathbb{R}^n \to S$ is nonexpansive: 
 \end{enumerate}
 
 \section{Answer}
+\subsection{(1)}
+\subsubsection{(a)}
+We know the projection:
+\begin{align*}
+    \mathcal{P}_S(y) = \arg\min_{\bm{x} \in S} \|\bm{x} - \bm{y}\|_2.
+\end{align*}
+We consider
+
+\[\min_{\bm{x}\in\mathbb{S}} \|\bm{x}-\bm{y}\|_2\]
+
+\noindent
+This means:
+
+\[\min_{\bm{x} \in \mathbb{S}} \sum_{i=1}^n (x_i - y_i)^2\]
+
+\noindent
+We can solve for each component $x_i$ independently:
+
+\[\min_{x_i \in [-1,1]} (x_i - y_i)^2\]
+
+\noindent
+This is just the Euclidean projection of a scalar onto the interval $[-1,1]$, which gives:
+
+\[x_i = \min(\max(y_i, -1), 1)\]
+
+\noindent
+and \[\bm{x} = [x_i]_{1}^{n}\]
+
+\subsubsection{(b)}
+
+We know the projection:
+\begin{align*}
+    \mathcal{P}_S(y) = \arg\min_{\bm{x} \in S} \|\bm{x} - \bm{y}\|_2 
+\end{align*}
+
+\begin{align*}
+    \mathcal{L}(\bm{x}, \lambda) = \frac{1}{2} \|\bm{x} - \bm{y}\|_2^2 + \lambda (\bm{a}^T \bm{x} - b), \quad \lambda \geq 0
+\end{align*}
+
+We know the KKT conditions:
+\begin{align*}
+    \nabla_x \mathcal{L} &= \bm{x} - \bm{y} + \lambda \bm{a} = 0 \\
+    \bm{x}^* &= \bm{y} - \lambda \bm{a}
+\end{align*}
+
+and
+\begin{align*}
+    \bm{a}^T \bm{x}^* \leq b \\
+    \bm{a}^T (\bm{y} - \lambda \bm{a}) \leq b \\
+    \bm{a}^T \bm{y} - \lambda \|\bm{a}\|^2 \leq b \\
+    \lambda \geq \frac{\bm{a}^T\bm{y} -b}{\|\bm{a}\|^2}
+\end{align*}
+
+and we know:
+\begin{align*}
+    \lambda(\bm{a}^T\bm{x} - b) = 0 \\
+    \lambda(\bm{a}^T\bm{y} - \lambda\|\bm{a}\|^2 - b) = 0 \\
+\end{align*}
+So we get \(\lambda = \max(0, \frac{\bm{a}^T\bm{y} - b}{\|\bm{a}\|^2})\)
+
+\noindent
+So we can get 
+\begin{align*}
+    \mathcal{P}_S(\bm{y}) = \bm{y} - \max(0, \frac{\bm{a}^T\bm{y} - b}{\|\bm{a}\|^2})\bm{a}
+\end{align*}
+
+\subsection{(2)}
+\subsubsection{(a)}
+
 
 
 \end{document}
