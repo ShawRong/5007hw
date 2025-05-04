@@ -194,6 +194,98 @@ Therefore, we can conclude:
 
 \subsection{(3)}
 \subsubsection{(a)}
+We know the Lagrange formula:
+\begin{align*}
+    \mathcal{L}(x, \lambda) = \frac{1}{2} \|x - y\|_2^2 + \lambda(\|x\|_1 - 1)
+\end{align*}
 
+And the primal problem can be written as:
+\begin{align*}
+    \min_{x} \max_{\lambda \geq 0} \mathcal{L}(x, \lambda)
+\end{align*}
+And the dual problem can be written as:
+\begin{align*}
+    \max_{\lambda \geq 0} \min_{x} \mathcal{L}(x, \lambda) \\
+    \max_{\lambda \geq 0} \min_{x} \frac{1}{2} \|x - y\|_2^2 + \lambda(\|x\|_1 - 1)
+\end{align*}
+The problem is separable in x, so we can reformulate this problem as:
+\begin{align*}
+    \max_{\lambda \geq 0} \min_{x_i} \frac{1}{2} (x_i - y_i)^2 + \lambda|x_i| - \lambda
+\end{align*}
+Consider \(\min_{x_i} \frac{1}{2} (x_i - y_i)^2 + \lambda|x_i|\).
+Apparently, this is a soft-thresholding operator which have been solved in hw4. We can derive:
+\begin{align*}
+    x_i^* = \begin{cases}
+        y_i - \lambda &\text{if}\quad y_i > \lambda \\
+        y_i + \lambda &\text{if}\quad y_i < -\lambda \\
+        0             &\text{if}\quad |y_i| \leq \lambda
+    \end{cases}
+\end{align*}
+
+If \(|y_i| \leq \lambda\):
+\begin{align*}
+    \min_{x_i} \frac{1}{2} (x_i - y_i)^2 + \lambda|x_i| = \frac{1}{2} y_i^2 \\
+\end{align*}
+
+If \(y_i > \lambda\):
+\begin{align*}
+    \min_{x_i} \frac{1}{2} (x_i - y_i)^2 + \lambda|x_i|&\\
+    &= \frac{1}{2} \lambda^2 + \lambda y_i - \lambda^2  \\
+    &= \lambda y_i - \frac{1}{2} \lambda^2\\
+\end{align*}
+
+
+If \(y_i < \lambda\):
+\begin{align*}
+    \min_{x_i} \frac{1}{2} (x_i - y_i)^2 + \lambda|x_i|&\\
+    &= \frac{1}{2} \lambda^2 - \lambda y_i - \lambda^2  \\
+    &= -\lambda y_i - \frac{1}{2} \lambda^2\\
+\end{align*}
+
+In conclusion,
+\begin{align*}
+    h_{\lambda}(y_i) = \begin{cases}
+        \frac{1}{2} y_i^2 &\text{if} \quad |y_i| \leq \lambda \\
+        \lambda|y_i| - \frac{1}{2} \lambda^2 &\text{if} \quad |y_i| > \lambda \\
+    \end{cases}
+\end{align*}
+And the dual problem can be written as:
+\[\max_{\lambda\geq 0} d(\lambda), \quad d(\lambda) = \sum_{i=1}^n h_\lambda(y_i) - \lambda,\]
+
+
+\subsubsection{(b)}
+The objective \(\frac{1}{2} \|x - y\|_2^2\) and the constraint \(\|x\|_1 \leq 1\) is convex. \\
+And we know for Slater's condition, we can easily find \(x = 0, x \in \R^n\), s.t. \(\|x\|_1 < 1\). \\
+Hence, strong duality holds.
+
+\subsubsection{(c)}
+\[d(\lambda) = \sum_{i=1}^n h_\lambda(y_i) - \lambda,\]
+\[d'(\lambda) = \sum_{i=1}^{n} h_\lambda'(y_i) - 1\]
+
+\begin{align*}
+    h_{\lambda}(y_i) = \begin{cases}
+        \frac{1}{2} y_i^2 &\text{if} \quad |y_i| \leq \lambda \\
+        \lambda|y_i| - \frac{1}{2} \lambda^2 &\text{if} \quad |y_i| > \lambda \\
+    \end{cases}
+\end{align*}
+
+\begin{align*}
+    \partial h'_{\lambda}(y_i) = \begin{cases}
+        0 &\text{if} \quad |y_i| \leq \lambda \\
+        |y_i| - \lambda  &\text{if} \quad |y_i| > \lambda \\
+    \end{cases}
+\end{align*}
+
+\begin{align*}
+    d'(\lambda) = \sum_{i=1}^{n} h_\lambda'(y_i) - 1 \\
+    d'(\lambda) = \sum_{i=1}^{n} \max\{|y_i| - \lambda, 0\} - 1 \\
+\end{align*}
+Hence
+\begin{align*}
+    \lambda^* = \frac{\sum_{i=n-k+1}^{n}|y_{i}| - 1}{k}
+\end{align*}
+where \(|y_i|\) is rearrange by descending order, and k is the number of \(|y_i|\) values greater than \(\lambda\).
+
+\subsubsection{(d)}
 
 \end{document}
